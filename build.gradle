@@ -1,0 +1,32 @@
+apply plugin: 'codenarc'
+apply plugin: 'groovy'
+
+group = 'io.mflo'
+version = '0.0.0'
+
+codenarc {
+  configFile project.file('codenarc.xml')
+}
+
+dependencies {
+  compile 'org.codehaus.groovy:groovy-all:2.4.5:indy'
+  testCompile 'cglib:cglib:3.1'
+  testCompile 'org.spockframework:spock-core:1.0-groovy-2.4'
+}
+
+repositories {
+  mavenCentral()
+}
+
+tasks.withType(GroovyCompile) {
+  groovyOptions.optimizationOptions.indy = true
+}
+
+test {
+  testLogging {
+    showStandardStreams = true
+  }
+}
+
+classes.dependsOn codenarcMain
+testClasses.dependsOn codenarcTest

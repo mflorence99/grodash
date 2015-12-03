@@ -1,0 +1,3 @@
+moduleName = groovy-lodash
+moduleVersion = 1.0.0
+extensionClasses = io.mflo.groovy_lodash.ListExtension
