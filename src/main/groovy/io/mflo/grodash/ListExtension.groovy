@@ -1,4 +1,4 @@
-package io.mflo.groovy_lodash
+package io.mflo.grodash
 
 import groovy.transform.*
 
@@ -37,5 +37,5 @@ import groovy.transform.*
     excludes.each { exclude -> result = result - exclude }
     return result as List
   }
-  
+
 }

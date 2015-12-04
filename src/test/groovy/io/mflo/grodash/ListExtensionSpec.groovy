@@ -1,4 +1,4 @@
-package io.mflo.groovy_lodash
+package io.mflo.grodash
 
 import spock.lang.Specification
 
@@ -31,5 +31,5 @@ class ListExtensionSpec extends Specification {
     expect:
       list.difference([4, 2]) == [1, 3]
   }
-  
+
 }
