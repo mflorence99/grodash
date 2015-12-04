@@ -6,6 +6,12 @@ I will attempt to combine idiomatic Groovy syntax with lodash semantics. So, for
 
 Each ported function and method will be backed by a thorough [Spock]() unit test to validate the equivalence. I will make no attempt to replicate the lodash documentation in Groovydoc format, although I plan to host a very basic Groovydoc site.
 
+I will die a happy man if I can make my code as performant as lodash! In the meantime, my only objective is to make it correct. A later release will focus on optimizations.
+
+## How to install
+
+## How to Build from Source and Run Unit Tests
+
 ## Array (lodash) / List (Groovy) Methods
 
 | Groovy | lodash | Example |
