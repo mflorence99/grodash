@@ -19,4 +19,17 @@ class ListExtensionSpec extends Specification {
       list.chunk(6) == [[1, 2, 3, 4, 5]]
   }
 
+  def 'compact() creates a new list with all falsey values removed'() {
+    def list = [0, 1, false, 2, '', 3];
+    expect:
+      list.compact() == [1, 2, 3]
+      list.compact() == list.findAll()
+  }
+
+  def 'difference() creates a new list from unique values not in provided lists'() {
+    def list = [1, 2, 3]
+    expect:
+      list.difference([4, 2]) == [1, 3]
+  }
+  
 }
