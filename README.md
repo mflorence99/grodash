@@ -12,16 +12,25 @@ I will die a happy man if I can make my code as performant as lodash! In the mea
 
 ## How to Build from Source and Run Unit Tests
 
-## Array (lodash) / List (Groovy) Methods
+## Groovy List Methods
 
-| Groovy | lodash | Example |
+| Groovy | lodash | Expect |
 | --- | --- | --- |
-| `chunk` | [`_.chunk`](https://lodash.com/docs#chunk) | `assert [1, 2, 3].chunk(2) == [[1, 2], [3]]` |
-| `compact` | [`_.compact`](https://lodash.com/docs#compact) | `assert [0, 1, false, 2, '', 3].compact() == [1, 2, 3]` |
-| `difference` | [`_.difference`](https://lodash.com/docs#difference) | `assert [1, 2, 3].difference([4, 2]) == [1, 3]` |
-| [`drop`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#drop%28int%29)<sup>1</sup> | [`_.drop`](https://lodash.com/docs#drop) | `assert [1, 2, 3].drop(2) == [3]` |
-| [`dropRight`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#dropRight%28int%29)<sup>1</sup> | [`_.dropRight`](https://lodash.com/docs#dropRight) | `assert [1, 2, 3].dropRight(2) == [1]` |
-| `dropRightWhile` | [`_.dropRightWhile`](https://lodash.com/docs#dropRightWhile) | `assert [1, 3, 2].dropRightWhile{ it < 3 } == [1, 3]` |
-| [`dropWhile`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#dropWhile%28groovy.lang.Closure%29)<sup>1</sup> | [`_.dropWhile`](https://lodash.com/docs#dropWhile) | `assert [1, 3, 2].dropWhile{ it < 3 } == [3, 2]` |
+| `chunk` | [`_.chunk`](https://lodash.com/docs#chunk) | `[1, 2, 3].chunk(2) == [[1, 2], [3]]` |
+| `compact` | [`_.compact`](https://lodash.com/docs#compact) | `[0, 1, false, 2, '', 3].compact() == [1, 2, 3]` |
+| `difference` | [`_.difference`](https://lodash.com/docs#difference) | `[1, 2, 3].difference([4, 2]) == [1, 3]` |
+| [`drop`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#drop%28int%29)<sup>[1]</sup> | [`_.drop`](https://lodash.com/docs#drop) | `[1, 2, 3].drop(2) == [3]` |
+| [`dropRight`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#dropRight%28int%29)<sup>[1]</sup> | [`_.dropRight`](https://lodash.com/docs#dropRight) | `[1, 2, 3].dropRight(2) == [1]` |
+| `dropRightWhile`<sup>[2]</sup> | [`_.dropRightWhile`](https://lodash.com/docs#dropRightWhile) | `[1, 3, 2].dropRightWhile{ it < 3 } == [1, 3]` |
+| [`dropWhile`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#dropWhile%28groovy.lang.Closure%29)<sup>[1, 2]</sup> | [`_.dropWhile`](https://lodash.com/docs#dropWhile) | `[1, 3, 2].dropWhile{ it < 3 } == [3, 2]` |
+| `pluck` | [`_.pluck`](https://lodash.com/docs#pluck) | `[[a: 1], [a: 2]].pluck('a') == [1, 2]` |
 
-> <sup>1</sup> Already implemented in Groovy
+> <sup>[1]</sup> Already implemented in Groovy
+>
+> <sup>[2]</sup> Semantics and syntax expanded to match lodash
+
+## Groovy Map Methods
+
+| Groovy | lodash | Expect |
+| --- | --- | --- |
+| `property` |  | `[a: [b: 'c']].property('a.b') == 'c'` |

@@ -9,6 +9,26 @@ import groovy.transform.*
  */
 @CompileDynamic class ListExtension {
 
+  /* make a closure for matching list values, lodash-style */
+  static Closure makeMatcher = { args ->
+    def undefined = Math.random()
+    def matcher = { template, obj ->
+      return template.every { path, value ->
+        // NOTE: special case when value is undefined, just looking for Groovy truth
+        (value == undefined)? obj.property(path) : (obj.property(path) == value)
+      }
+    }
+    if ((args.length == 1) && (args[0] instanceof Closure))
+      return args[0]
+    else if ((args.length == 1) && (args[0] instanceof Map))
+      return matcher.curry(args[0])
+    else if (args.length == 1)
+      return matcher.curry([ (args[0]): undefined ])
+    else if (args.length == 2)
+      return matcher.curry([ (args[0]): args[1] ])
+    else throw IllegalArgumentException("Match must be Closure, Map, property name or property name + value; found ${args}")
+  }
+
   /** Splits a list into a groups the length of size. If the list can’t be split evenly, the final chunk will be the remaining elements. */
   static List chunk(final List self,
                     final int size = 1) {
@@ -36,6 +56,37 @@ import groovy.transform.*
     Set result = self as Set
     excludes.each { exclude -> result = result - exclude }
     return result as List
+  }
+
+  /** Creates a slice of the list excluding elements dropped from the end. Elements are dropped until the closure returns falsey. */
+  static List dropRightWhile(final List self,
+                             final Object... args) {
+    Closure fn = makeMatcher(args)
+    def result = self.collect()
+    while (fn.call(result.getAt(result.size() - 1)))
+      result.removeAt(result.size() - 1)
+    return result
+  }
+
+  /** Creates a slice of the list excluding elements dropped from the beginning. Elements are dropped until the closure returns falsey. */
+  static List dropWhile(final List self,
+                        final Object... args) {
+    Closure fn = makeMatcher(args)
+    def result = self.collect()
+    while (fn.call(result.getAt(0)))
+      result.removeAt(0)
+    return result
+  }
+
+  /** Gets the property value of path from all elements in the list. */
+  static List pluck(final List self,
+                    final def path) {
+    self.inject([]) { result, obj ->
+      def value = obj.property(path)
+      if (value)
+        result << value
+      return result
+    }
   }
 
 }
