@@ -61,6 +61,13 @@ class ListExtensionSpec extends Specification {
       flintstones.dropWhile([ 'active': false ]).pluck('name') == ['pebbles']
   }
 
+  def 'fill() fills elements of a list with a value'() {
+    expect:
+      [1, 2, 3].fill(0) == [0, 0, 0]
+      [1, 2, 3].fill(0, 1) == [1, 0, 0]
+      [].fill(1, 0, 5) == [1, 1, 1, 1, 1]
+  }
+
   def 'pluck() gets a named property value from all elements'() {
     expect:
       [[a: 1], [a: 2]].pluck('a') == [1, 2]

@@ -12,6 +12,7 @@
   <ruleset-ref path='rulesets/braces.xml'>
     <exclude name='IfStatementBraces'/>
     <exclude name='ElseBlockBraces'/>
+    <exclude name='ForStatementBraces'/>
     <exclude name='WhileStatementBraces'/>
   </ruleset-ref>
 

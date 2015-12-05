@@ -78,6 +78,21 @@ import groovy.transform.*
     return result
   }
 
+  /**
+   * Fills elements of the list with value from start up to, but not including, end.
+   *
+   * <p><b>NOTE</b> the list is mutated</p>
+   */
+  static List fill(final List self,
+                   final Object value,
+                   final int start = 0,
+                   final int end = Integer.MAX_VALUE) {
+    int stop = (end == Integer.MAX_VALUE)? self.size() : end
+    for (int i = start; i < stop; i++)
+      self[i] = value
+    return self
+  }
+
   /** Gets the property value of path from all elements in the list. */
   static List pluck(final List self,
                     final def path) {
