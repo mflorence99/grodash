@@ -63,7 +63,7 @@ import groovy.transform.*
                              final Object... args) {
     Closure fn = makeMatcher(args)
     def result = self.collect()
-    while (fn.call(result.getAt(result.size() - 1)))
+    while (fn.call(result[result.size() - 1]))
       result.removeAt(result.size() - 1)
     return result
   }
@@ -73,7 +73,7 @@ import groovy.transform.*
                         final Object... args) {
     Closure fn = makeMatcher(args)
     def result = self.collect()
-    while (fn.call(result.getAt(0)))
+    while (fn.call(result[0]))
       result.removeAt(0)
     return result
   }
@@ -91,6 +91,24 @@ import groovy.transform.*
     for (int i = start; i < stop; i++)
       self[i] = value
     return self
+  }
+
+  /** Returns the index of the first element the predicate returns truthy for, starting at the beginning. */
+  static int findIndex(final List self,
+                       final Object... args) {
+    Closure fn = makeMatcher(args)
+    int index = 0
+    for (; (index < self.size()) && !fn.call(self[index]); index++) { }
+    return (index < self.size())? index : -1
+  }
+
+  /** Returns the index of the first element the predicate returns truthy for, starting at the end. */
+  static int findLastIndex(final List self,
+                           final Object... args) {
+    Closure fn = makeMatcher(args)
+    int index = self.size() - 1
+    for (; (index >= 0) && !fn.call(self[index]); index--) { }
+    return index
   }
 
   /** Gets the property value of path from all elements in the list. */

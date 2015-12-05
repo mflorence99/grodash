@@ -32,6 +32,8 @@ gradle test
 | [`dropRight`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#dropRight%28int%29)<sup>[1]</sup> | [`_.dropRight`](https://lodash.com/docs#dropRight) | `[1, 2, 3].dropRight(2) == [1]` |
 | `dropRightWhile`<sup>[2]</sup> | [`_.dropRightWhile`](https://lodash.com/docs#dropRightWhile) | `[1, 3, 2].dropRightWhile{ it < 3 } == [1, 3]` |
 | [`dropWhile`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#dropWhile%28groovy.lang.Closure%29)<sup>[1, 2]</sup> | [`_.dropWhile`](https://lodash.com/docs#dropWhile) | `[1, 3, 2].dropWhile{ it < 3 } == [3, 2]` |
+| `findIndex` | [`_.findIndex`](https://lodash.com/docs#findIndex) | `[3, 2, 1].findIndex{ it == 3 } == 0` |
+| `findLastIndex` | [`_.findLastIndex`](https://lodash.com/docs#findLastIndex) | `[3, 2, 1].findLastIndex{ it == 1 } == 2` |
 | `pluck` | [`_.pluck`](https://lodash.com/docs#pluck) | `[[a: 1], [a: 2]].pluck('a') == [1, 2]` |
 
 > <sup>[1]</sup> Already implemented in Groovy

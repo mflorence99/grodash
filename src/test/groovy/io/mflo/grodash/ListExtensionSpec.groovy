@@ -68,6 +68,24 @@ class ListExtensionSpec extends Specification {
       [].fill(1, 0, 5) == [1, 1, 1, 1, 1]
   }
 
+  def 'findIndex() returns the index of the first element the predicate returns truthy for'() {
+    expect:
+      [3, 2, 1].findIndex{ it == 3 } == 0
+      flintstones.findIndex('active') == 2
+      flintstones.findIndex('active', false) == 0
+      flintstones.findIndex(['name': 'fred', 'active': false]) == 1
+      flintstones.findIndex(['name': 'bambam']) == -1
+  }
+
+  def 'findIndex() returns the index of the last element the predicate returns truthy for'() {
+    expect:
+      [3, 2, 1].findLastIndex{ it == 1 } == 2
+      flintstones.findLastIndex('active') == 2
+      flintstones.findLastIndex('active', false) == 1
+      flintstones.findLastIndex(['name': 'fred', 'active': false]) == 1
+      flintstones.findLastIndex(['name': 'bambam']) == -1
+  }
+
   def 'pluck() gets a named property value from all elements'() {
     expect:
       [[a: 1], [a: 2]].pluck('a') == [1, 2]
