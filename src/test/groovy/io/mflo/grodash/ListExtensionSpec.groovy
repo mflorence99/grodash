@@ -86,6 +86,16 @@ class ListExtensionSpec extends Specification {
       flintstones.findLastIndex(['name': 'bambam']) == -1
   }
 
+  def 'first() gets the first element of the list'() {
+    expect:
+      [1, 2, 3].first() == 1
+  }
+
+  def 'flattendDeep() recursively flattens a nested list'() {
+    expect:
+      [1, [2, 3, [4]]].flattenDeep() == [1, 2, 3, 4]
+  }
+
   def 'pluck() gets a named property value from all elements'() {
     expect:
       [[a: 1], [a: 2]].pluck('a') == [1, 2]

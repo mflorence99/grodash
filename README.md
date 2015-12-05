@@ -21,7 +21,7 @@ git clone git@github.com:mflorence99/grodash.git
 gradle test
 ```
 
-## Groovy List Methods
+## Groovy Methods and lodash Equivalents
 
 | Groovy | lodash | Expect |
 | --- | --- | --- |
@@ -34,11 +34,16 @@ gradle test
 | [`dropWhile`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#dropWhile%28groovy.lang.Closure%29)<sup>[1, 2]</sup> | [`_.dropWhile`](https://lodash.com/docs#dropWhile) | `[1, 3, 2].dropWhile{ it < 3 } == [3, 2]` |
 | `findIndex` | [`_.findIndex`](https://lodash.com/docs#findIndex) | `[3, 2, 1].findIndex{ it == 3 } == 0` |
 | `findLastIndex` | [`_.findLastIndex`](https://lodash.com/docs#findLastIndex) | `[3, 2, 1].findLastIndex{ it == 1 } == 2` |
+| [`first`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#first%28%29)<sup>[1]</sup> | [`_.first`](https://lodash.com/docs#first) | `[1, 2, 3].first() == 1` |
+| [`flatten`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#flatten%28%29)<sup>[1, 3]</sup> | [`_.flatten`](https://lodash.com/docs#flatten) | `[1, [2, 3, [4]]].flatten() == [1, 2, 3, 4]` |
+| `flattenDeep` | [`_.flattenDeep`](https://lodash.com/docs#flattenDeep) | `[1, [2, 3, [4]]].flattenDeep() == [1, 2, 3, 4]` |
 | `pluck` | [`_.pluck`](https://lodash.com/docs#pluck) | `[[a: 1], [a: 2]].pluck('a') == [1, 2]` |
 
 > <sup>[1]</sup> Already implemented in Groovy
 >
 > <sup>[2]</sup> Semantics and syntax expanded to match lodash
+>
+> <sup>[3]</sup> Only 'deep' semantics implemented
 
 ## Groovy Map Methods
 

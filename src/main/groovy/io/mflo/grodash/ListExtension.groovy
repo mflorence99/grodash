@@ -111,6 +111,11 @@ import groovy.transform.*
     return index
   }
 
+  /** Recursively flattens a nested list. */
+  static List flattenDeep(final List self) {
+    self.flatten()
+  }
+
   /** Gets the property value of path from all elements in the list. */
   static List pluck(final List self,
                     final def path) {
