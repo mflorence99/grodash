@@ -37,16 +37,13 @@ gradle test
 | [`first`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#first%28%29)<sup>[1]</sup> | [`_.first`](https://lodash.com/docs#first) | `[1, 2, 3].first() == 1` |
 | [`flatten`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#flatten%28%29)<sup>[1, 3]</sup> | [`_.flatten`](https://lodash.com/docs#flatten) | `[1, [2, 3, [4]]].flatten() == [1, 2, 3, 4]` |
 | `flattenDeep` | [`_.flattenDeep`](https://lodash.com/docs#flattenDeep) | `[1, [2, 3, [4]]].flattenDeep() == [1, 2, 3, 4]` |
+| `indexOf` | [`_.indexOf`](https://lodash.com/docs#indexOf) | `[1, 2, 1, 2].indexOf(2) == 1` |
+| `initial` | [`_.initial`](https://lodash.com/docs#initial) | `[1, 2, 3].initial() == [1, 2]` |
 | `pluck` | [`_.pluck`](https://lodash.com/docs#pluck) | `[[a: 1], [a: 2]].pluck('a') == [1, 2]` |
+| `property` |  | `[a: [b: 'c']].property('a.b') == 'c'` |
 
 > <sup>[1]</sup> Already implemented in Groovy
 >
 > <sup>[2]</sup> Semantics and syntax expanded to match lodash
 >
 > <sup>[3]</sup> Only 'deep' semantics implemented
-
-## Groovy Map Methods
-
-| Groovy | lodash | Expect |
-| --- | --- | --- |
-| `property` |  | `[a: [b: 'c']].property('a.b') == 'c'` |

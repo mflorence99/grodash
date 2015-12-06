@@ -88,8 +88,8 @@ import groovy.transform.*
                    final int start = 0,
                    final int end = Integer.MAX_VALUE) {
     int stop = (end == Integer.MAX_VALUE)? self.size() : end
-    for (int i = start; i < stop; i++)
-      self[i] = value
+    for (int index = start; index < stop; index++)
+      self[index] = value
     return self
   }
 
@@ -114,6 +114,25 @@ import groovy.transform.*
   /** Recursively flattens a nested list. */
   static List flattenDeep(final List self) {
     self.flatten()
+  }
+
+  /**
+   * Gets the index at which the first occurrence of value is found in the list.
+   *
+   * <p><b>NOTE</b> if fromIndex is negative, it's used as an offset from the end.</p>
+   */
+  static int indexOf(final List self,
+                     final Object value,
+                     final int fromIndex = 0) {
+    int index = (fromIndex >= 0)? fromIndex : Math.max(0, self.size() + fromIndex)
+    int stop = self.size()
+    for (; (index < stop) && (self[index] != value); index++) { }
+    return (index < self.size())? index : -1
+  }
+
+  /** Gets all but the last element of the list. */
+  static List initial(final List self) {
+    self.init()
   }
 
   /** Gets the property value of path from all elements in the list. */

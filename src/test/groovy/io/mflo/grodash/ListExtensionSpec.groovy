@@ -96,6 +96,19 @@ class ListExtensionSpec extends Specification {
       [1, [2, 3, [4]]].flattenDeep() == [1, 2, 3, 4]
   }
 
+  def 'indexOf() gets the index at which the first occurence of value is found'() {
+    expect:
+      [1, 2, 1, 2].indexOf(2) == 1
+      [1, 2, 1, 2].indexOf(2, 2) == 3
+      [1, 2, 1, 2].indexOf(2, -3) == 1
+      [1, 2, 1, 2].indexOf(3) == -1
+  }
+
+  def 'initial() gets all but the last element of the list'() {
+    expect:
+      [1, 2, 3].initial() == [1, 2]
+  }
+
   def 'pluck() gets a named property value from all elements'() {
     expect:
       [[a: 1], [a: 2]].pluck('a') == [1, 2]
