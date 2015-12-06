@@ -109,6 +109,17 @@ class ListExtensionSpec extends Specification {
       [1, 2, 3].initial() == [1, 2]
   }
 
+  def 'intersection() creates a list of unique values'() {
+    expect:
+      [1, 2, 3, 4, 5].intersection([4, 5, 6, 7, 8]) == [4, 5]
+      [1, 2].intersection([4, 2], [2, 1]) == [2]
+  }
+
+  def 'last() gets the last element of the list'() {
+    expect:
+      [1, 2, 3].last() == 3
+  }
+
   def 'pluck() gets a named property value from all elements'() {
     expect:
       [[a: 1], [a: 2]].pluck('a') == [1, 2]

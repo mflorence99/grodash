@@ -135,6 +135,12 @@ import groovy.transform.*
     self.init()
   }
 
+  /** Creates a list of unique values that are included in all of the provided lists. */
+  static List intersection(final List self,
+                           final List... others) {
+    others.inject(self.collect()) { result, other -> result.intersect(other) }
+  }
+
   /** Gets the property value of path from all elements in the list. */
   static List pluck(final List self,
                     final def path) {

@@ -37,8 +37,11 @@ gradle test
 | [`first`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#first%28%29)<sup>[1]</sup> | [`_.first`](https://lodash.com/docs#first) | `[1, 2, 3].first() == 1` |
 | [`flatten`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#flatten%28%29)<sup>[1, 3]</sup> | [`_.flatten`](https://lodash.com/docs#flatten) | `[1, [2, 3, [4]]].flatten() == [1, 2, 3, 4]` |
 | `flattenDeep` | [`_.flattenDeep`](https://lodash.com/docs#flattenDeep) | `[1, [2, 3, [4]]].flattenDeep() == [1, 2, 3, 4]` |
+| [`head`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#head%28%29)<sup>[1]</sup> | [`_.head`](https://lodash.com/docs#head) | `[1, 2, 3].head() == 1` |
 | `indexOf` | [`_.indexOf`](https://lodash.com/docs#indexOf) | `[1, 2, 1, 2].indexOf(2) == 1` |
 | `initial` | [`_.initial`](https://lodash.com/docs#initial) | `[1, 2, 3].initial() == [1, 2]` |
+| `intersection` | [`_.intersection`](https://lodash.com/docs#intersection) | `[1, 2].intersection([4, 2], [2, 1]) == [2]` |
+| [`last`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#last%28%29)<sup>[1]</sup> | [`_.last`](https://lodash.com/docs#last) | `[1, 2, 3].last() == 3` |
 | `pluck` | [`_.pluck`](https://lodash.com/docs#pluck) | `[[a: 1], [a: 2]].pluck('a') == [1, 2]` |
 | `property` |  | `[a: [b: 'c']].property('a.b') == 'c'` |
 
