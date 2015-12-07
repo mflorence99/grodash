@@ -72,7 +72,7 @@ import groovy.transform.*
     return result as List
   }
 
-  /** Creates a slice of the list excluding items dropped from the end. Elements are dropped until the closure returns falsey. */
+  /** Creates a slice of the list excluding items dropped from the end. Items are dropped until the closure returns falsey. */
   static List dropRightWhile(final List self,
                              final Object... args) {
     Closure fn = makeMatcher(args)
@@ -82,7 +82,7 @@ import groovy.transform.*
     return result
   }
 
-  /** Creates a slice of the list excluding items dropped from the beginning. Elements are dropped until the closure returns falsey. */
+  /** Creates a slice of the list excluding items dropped from the beginning. Items are dropped until the closure returns falsey. */
   static List dropWhile(final List self,
                         final Object... args) {
     Closure fn = makeMatcher(args)
@@ -262,6 +262,26 @@ import groovy.transform.*
       while ((++index < self.size()) && (fn.call(self.getAt(index), value) == 0)) { }
       return index
     }
+  }
+
+  /** Creates a slice of the list with items taken from the end. Items are taken until the closure returns falsey. */
+  static List takeRightWhile(final List self,
+                             final Object... args) {
+    Closure fn = makeMatcher(args)
+    def result = []
+    for (int index = self.size() - 1; (index >= 0) && fn.call(self[index]); index--)
+      result << self.getAt(index)
+    return result.reverse()
+  }
+
+  /** Creates a slice of the list with items taken from the beginning. Items are taken until the closure returns falsey. */
+  static List takeWhile(final List self,
+                        final Object... args) {
+    Closure fn = makeMatcher(args)
+    def result = []
+    for (int index = 0; (index < self.size()) && fn.call(self[index]); index++)
+      result << self.getAt(index)
+    return result
   }
 
   /**

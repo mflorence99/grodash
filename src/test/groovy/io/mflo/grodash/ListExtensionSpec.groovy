@@ -33,15 +33,13 @@ class ListExtensionSpec extends Specification {
   }
 
   def 'difference() creates a new list from unique values not in provided lists'() {
-    def list = [1, 2, 3]
     expect:
-      list.difference([4, 2]) == [1, 3]
+      [1, 2, 3].difference([4, 2]) == [1, 3]
   }
 
   def 'dropRightWhile() creates a slice of the list, dropping items from the end'() {
-    def list = [1, 3, 2]
     expect:
-      list.dropRightWhile{ it < 3 } == [1, 3]
+      [1, 3, 2].dropRightWhile{ it < 3 } == [1, 3]
   }
 
   def 'dropRightWhile() also emulates extended lodash semantics and syntax'() {
@@ -50,9 +48,8 @@ class ListExtensionSpec extends Specification {
   }
 
   def 'dropWhile() creates a slice of the list, dropping items from the beginning'() {
-    def list = [1, 3, 2]
     expect:
-      list.dropWhile{ it < 3 } == [3, 2]
+      [1, 3, 2].dropWhile{ it < 3 } == [3, 2]
   }
 
   def 'dropWhile() also emulates extended lodash semantics and syntax'() {
@@ -197,6 +194,27 @@ class ListExtensionSpec extends Specification {
   def 'takeRight() creates a slice of a list with n elements taken from the end'() {
     expect:
      [1, 2, 3].takeRight(2) == [2, 3]
+  }
+
+  def 'takeRightWhile() creates a slice of the list, taking items from the end'() {
+    expect:
+      [1, 2, 3].takeRightWhile{ it > 1 } == [2, 3]
+  }
+
+  def 'takeRightWhile() also emulates extended lodash semantics and syntax'() {
+    expect:
+      flintstones.takeRightWhile([ 'name': 'pebbles', 'active': true ]).pluck('name') == ['pebbles']
+  }
+
+  def 'takeWhile() creates a slice of the list, takeing items from the beginning'() {
+    expect:
+      [1, 2, 3].takeWhile{ it < 3 } == [1, 2]
+  }
+
+  def 'takeWhile() also emulates extended lodash semantics and syntax'() {
+    expect:
+      flintstones.takeWhile('spouse.name').pluck('spouse.name') == ['betty', 'wilma']
+      flintstones.takeWhile([ 'active': false ]).pluck('name') == ['barney', 'fred']
   }
 
   def 'zipObject() returns an object composed from a list of names and values'() {
