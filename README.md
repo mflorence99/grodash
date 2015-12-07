@@ -56,6 +56,7 @@ gradle test
 | `removeElements`<sup>[5]</sup> | [`_.remove`](https://lodash.com/docs#remove) | `[1, 2, 3, 4].removeElements{ it % 2 } == [1, 3]` |
 | `rest` | [`_.rest`](https://lodash.com/docs#rest) | `[1, 2, 3].rest() == [2, 3]` |
 | [`tail`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#tail%28%29)<sup>[1]</sup> | [`_.tail`](https://lodash.com/docs#tail) | `[1, 2, 3].tail() == [2, 3]` |
+| `slice` | [`_.slice`](https://lodash.com/docs#slice) | `[1, 2, 3, 4, 5].slice(2, 4) == [3, 4]` |
 | `zipObject` | [`_.zipObject`](https://lodash.com/docs#zipObject) | `[['fred', 30], ['barney', 40]].zipObject() == [ 'fred': 30, 'barney': 40 ]` |
 
 > <sup>[1]</sup> Already implemented in Groovy

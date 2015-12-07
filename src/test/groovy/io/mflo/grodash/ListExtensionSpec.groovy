@@ -167,6 +167,13 @@ class ListExtensionSpec extends Specification {
       [1, 2, 3].tail() == [1, 2, 3].rest()
   }
 
+  def 'slice() creates a slice of the list from start to end'() {
+    expect:
+      [1, 2, 3, 4, 5].slice() == [1, 2, 3, 4, 5]
+      [1, 2, 3, 4, 5].slice(2) == [3, 4, 5]
+      [1, 2, 3, 4, 5].slice(2, 4) == [3, 4]
+  }
+
   def 'zipObject() returns an object composed from a list of names and values'() {
     expect:
       [['fred', 30], ['barney', 40]].zipObject() == [ 'fred': 30, 'barney': 40 ]

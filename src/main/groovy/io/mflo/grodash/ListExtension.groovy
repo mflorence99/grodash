@@ -218,6 +218,14 @@ import groovy.transform.*
     self.tail()
   }
 
+  /** Creates a slice of the list from start up to, but not including, end. */
+  static List slice(final List self,
+                    final int start = 0,
+                    final int end = Integer.MAX_VALUE) {
+    int stop = (end == Integer.MAX_VALUE)? self.size() : end
+    return self.subList(start, stop).collect()
+  }
+
   /**
    * Returns an object composed from a list of names and values
    *
