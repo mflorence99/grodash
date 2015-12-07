@@ -48,14 +48,19 @@ gradle test
 | `intersection` | [`_.intersection`](https://lodash.com/docs#intersection) | `[1, 2].intersection([4, 2], [2, 1]) == [2]` |
 | [`last`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#last%28%29)<sup>[1]</sup> | [`_.last`](https://lodash.com/docs#last) | `[1, 2, 3].last() == 3` |
 | `lastIndexOf` | [`_.lastIndexOf`](https://lodash.com/docs#lastIndexOf) | `[1, 2, 1, 2].lastIndexOf(3) == 1` |
+| `object` | [`_.object`](https://lodash.com/docs#object) | `[['fred', 30], ['barney', 40]].object() == [ 'fred': 30, 'barney': 40 ]` |
 | `pluck` | [`_.pluck`](https://lodash.com/docs#pluck) | `[[a: 1], [a: 2]].pluck('a') == [1, 2]` |
-| `property` |  | `[a: [b: 'c']].property('a.b') == 'c'` |
+| `property`<sup>[4]</sup> |  | `[a: [b: 'c']].property('a.b') == 'c'` |
+| `pull` | [`_.pull`](https://lodash.com/docs#pull) | `[1, 2, 3, 1, 2, 3].pull(2, 3) == [1, 1]` |
+| `zipObject` | [`_.zipObject`](https://lodash.com/docs#zipObject) | `[['fred', 30], ['barney', 40]].zipObject() == [ 'fred': 30, 'barney': 40 ]` |
 
 > <sup>[1]</sup> Already implemented in Groovy
 >
 > <sup>[2]</sup> Semantics and syntax expanded to match lodash
 >
 > <sup>[3]</sup> Only 'deep' semantics implemented
+>
+> <sup>[4]</sup> New in this Groovy library
 
 ## <a name='todo'>Open Issues
 

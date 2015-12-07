@@ -38,7 +38,7 @@ class ListExtensionSpec extends Specification {
       list.difference([4, 2]) == [1, 3]
   }
 
-  def 'dropRightWhile() creates a slice of the list, dropping elements from the end'() {
+  def 'dropRightWhile() creates a slice of the list, dropping items from the end'() {
     def list = [1, 3, 2]
     expect:
       list.dropRightWhile{ it < 3 } == [1, 3]
@@ -49,7 +49,7 @@ class ListExtensionSpec extends Specification {
       flintstones.dropRightWhile([ 'name': 'pebbles', 'active': true ]).pluck('name') == ['barney', 'fred']
   }
 
-  def 'dropWhile() creates a slice of the list, dropping elements from the beginning'() {
+  def 'dropWhile() creates a slice of the list, dropping items from the beginning'() {
     def list = [1, 3, 2]
     expect:
       list.dropWhile{ it < 3 } == [3, 2]
@@ -61,7 +61,7 @@ class ListExtensionSpec extends Specification {
       flintstones.dropWhile([ 'active': false ]).pluck('name') == ['pebbles']
   }
 
-  def 'fill() fills elements of a list with a value'() {
+  def 'fill() fills items of a list with a value'() {
     expect:
       [1, 2, 3].fill(0) == [0, 0, 0]
       [1, 2, 3].fill(0, 1) == [1, 0, 0]
@@ -128,11 +128,28 @@ class ListExtensionSpec extends Specification {
       [1, 2, 1, 2].lastIndexOf(3) == -1
   }
 
-  def 'pluck() gets a named property value from all elements'() {
+  def 'object() is a synonym for zipObject'() {
+    expect:
+      [['fred', 30], ['barney', 40]].object() == [['fred', 30], ['barney', 40]].zipObject()
+      ['fred', 'barney'].object([30, 40])  == ['fred', 'barney'].zipObject([30, 40])
+  }
+
+  def 'pluck() gets a named property value from all items'() {
     expect:
       [[a: 1], [a: 2]].pluck('a') == [1, 2]
       flintstones.pluck('name') == ['barney', 'fred', 'pebbles']
       flintstones.pluck('spouse.name') == ['betty', 'wilma']
+  }
+
+  def 'pull() removes all provided values from the list'() {
+    expect:
+      [1, 2, 3, 1, 2, 3].pull(2, 3) == [1, 1]
+  }
+
+  def 'zipObject() returns an object composed from a list of names and values'() {
+    expect:
+      [['fred', 30], ['barney', 40]].zipObject() == [ 'fred': 30, 'barney': 40 ]
+      ['fred', 'barney'].zipObject([30, 40])  == [ 'fred': 30, 'barney': 40 ]
   }
 
 }

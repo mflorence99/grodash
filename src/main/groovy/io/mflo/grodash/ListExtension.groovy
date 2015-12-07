@@ -29,7 +29,7 @@ import groovy.transform.*
     else throw IllegalArgumentException("Match must be Closure, Map, property name or property name + value; found ${args}")
   }
 
-  /** Splits a list into a groups the length of size. If the list can’t be split evenly, the final chunk will be the remaining elements. */
+  /** Splits a list into a groups the length of size. If the list can’t be split evenly, the final chunk will be the remaining items. */
   static List chunk(final List self,
                     final int size = 1) {
     List result = []
@@ -58,7 +58,7 @@ import groovy.transform.*
     return result as List
   }
 
-  /** Creates a slice of the list excluding elements dropped from the end. Elements are dropped until the closure returns falsey. */
+  /** Creates a slice of the list excluding items dropped from the end. Elements are dropped until the closure returns falsey. */
   static List dropRightWhile(final List self,
                              final Object... args) {
     Closure fn = makeMatcher(args)
@@ -68,7 +68,7 @@ import groovy.transform.*
     return result
   }
 
-  /** Creates a slice of the list excluding elements dropped from the beginning. Elements are dropped until the closure returns falsey. */
+  /** Creates a slice of the list excluding items dropped from the beginning. Elements are dropped until the closure returns falsey. */
   static List dropWhile(final List self,
                         final Object... args) {
     Closure fn = makeMatcher(args)
@@ -79,9 +79,9 @@ import groovy.transform.*
   }
 
   /**
-   * Fills elements of the list with value from start up to, but not including, end.
+   * Fills items of the list with value from start up to, but not including, end.
    *
-   * <p><b>NOTE</b> the list is mutated</p>
+   * <p><b>NOTE</b> the list is mutated.</p>
    */
   static List fill(final List self,
                    final Object value,
@@ -155,7 +155,13 @@ import groovy.transform.*
     return (index >= 0)? index : -1
   }
 
-  /** Gets the property value of path from all elements in the list. */
+  /** See zipObject */
+  static Map object(final List self,
+                    final List values = null) {
+    self.zipObject(values)
+  }
+
+  /** Gets the property value of path from all items in the list. */
   static List pluck(final List self,
                     final def path) {
     self.inject([]) { result, obj ->
@@ -164,6 +170,39 @@ import groovy.transform.*
         result << value
       return result
     }
+  }
+
+  /**
+   * Removes all provided values from the list.
+   *
+   * <p><b>NOTE</b> the list is mutated.</p>
+   */
+  static List pull(final List self,
+                   final Object... values) {
+    for (int index = 0; index < self.size(); ) {
+      if (self.getAt(index) in values)
+        self.removeAt(index)
+      else index++
+    }
+    return self
+  }
+
+  /**
+   * Returns an object composed from a list of names and values
+   *
+   * <p><b>NOTE</b> Normally, the list is assumed to be a list of pairs of names and
+   * values. However, if a values parameter is supplied, the list is of names, and
+   * the values parameter is the list of corresponding values.</p>
+   */
+  static Map zipObject(final List self,
+                       final List values = null) {
+    def result = [:]
+    self.eachWithIndex { item, index ->
+      if (values == null)
+        result[item[0]] = item[1]
+      else result[item] = values[index]
+    }
+    return result
   }
 
 }
