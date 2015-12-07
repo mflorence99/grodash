@@ -117,7 +117,7 @@ import groovy.transform.*
   }
 
   /**
-   * Gets the index at which the first occurrence of value is found in the list.
+   * Gets the index of the first occurrence of value in the list, starting from the beginning.
    *
    * <p><b>NOTE</b> if fromIndex is negative, it's used as an offset from the end.</p>
    */
@@ -139,6 +139,20 @@ import groovy.transform.*
   static List intersection(final List self,
                            final List... others) {
     others.inject(self.collect()) { result, other -> result.intersect(other) }
+  }
+
+  /**
+   * Gets the index of the first occurrence of value in the list, starting from the end.
+   *
+   * <p><b>NOTE</b> if fromIndex is negative, it's used as an offset from the end.</p>
+   */
+  static int lastIndexOf(final List self,
+                         final Object value,
+                         final int fromIndex = -1) {
+    int index = (fromIndex >= 0)? fromIndex : Math.max(0, self.size() + fromIndex)
+    int stop = self.size()
+    for (; (index >= 0) && (self[index] != value); index--) { }
+    return (index >= 0)? index : -1
   }
 
   /** Gets the property value of path from all elements in the list. */

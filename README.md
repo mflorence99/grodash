@@ -1,18 +1,23 @@
 # A Groovy Port of [lodash](https://lodash.com/)
 
+* [How to Install](#install)
+* [How to Build](#build)
+* [Groovy Methods](#index)
+* [Open Issues](#todo)
+
 This is a spare-time project, and our objective is to port all of the [lodash v3.x](https://lodash.com/) functions and methods to Groovy that are not already part of Groovy itself, like `each`, for example.
 
-We will attempt to combine idiomatic Groovy syntax with lodash semantics. So, for example, `_.chunk([1, 2, 3], 2)` in lodash becomes `[1, 2, 3].chunk(2)` in Groovy and the result is `[[1, 2], [3]]` in both.
+We attempt to combine idiomatic Groovy syntax with lodash semantics. So, for example, `_.chunk([1, 2, 3], 2)` in lodash becomes `[1, 2, 3].chunk(2)` in Groovy and the result is `[[1, 2], [3]]` in both.
 
 Each ported function and method is backed by a thorough [Spock](http://spockframework.github.io/spock/docs/1.0/index.html) unit test to validate the equivalence. We will make no attempt to replicate the lodash documentation in Groovydoc format, although we plan to host a very basic Groovydoc site.
 
 We will die happy if we can make our code as performant as lodash! In the meantime, our only objective is to make it correct. A later release will focus on optimizations.
 
-## How to Install
+## <a name='install'>How to Install
 
 > TBD publish JAR on Maven / JCenter etc
 
-## How to Build from Source and Run Unit Tests
+## <a name='build'>How to Build from Source and Run Unit Tests
 
 ```sh
 mkdir -p ~/whatever/grodash
@@ -21,7 +26,7 @@ git clone git@github.com:mflorence99/grodash.git
 gradle test
 ```
 
-## Groovy Methods and lodash Equivalents
+## <a name='index'>Groovy Methods and lodash Equivalents
 
 | Groovy | lodash | Expect |
 | --- | --- | --- |
@@ -42,6 +47,7 @@ gradle test
 | `initial` | [`_.initial`](https://lodash.com/docs#initial) | `[1, 2, 3].initial() == [1, 2]` |
 | `intersection` | [`_.intersection`](https://lodash.com/docs#intersection) | `[1, 2].intersection([4, 2], [2, 1]) == [2]` |
 | [`last`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#last%28%29)<sup>[1]</sup> | [`_.last`](https://lodash.com/docs#last) | `[1, 2, 3].last() == 3` |
+| `lastIndexOf` | [`_.lastIndexOf`](https://lodash.com/docs#lastIndexOf) | `[1, 2, 1, 2].lastIndexOf(3) == 1` |
 | `pluck` | [`_.pluck`](https://lodash.com/docs#pluck) | `[[a: 1], [a: 2]].pluck('a') == [1, 2]` |
 | `property` |  | `[a: [b: 'c']].property('a.b') == 'c'` |
 
@@ -50,3 +56,8 @@ gradle test
 > <sup>[2]</sup> Semantics and syntax expanded to match lodash
 >
 > <sup>[3]</sup> Only 'deep' semantics implemented
+
+## <a name='todo'>Open Issues
+
+* application to `Collection`, `Iterable`, `Set`, `SortedSet` etc
+* lazy evaluation
