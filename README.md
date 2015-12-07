@@ -52,6 +52,10 @@ gradle test
 | `pluck` | [`_.pluck`](https://lodash.com/docs#pluck) | `[[a: 1], [a: 2]].pluck('a') == [1, 2]` |
 | `property`<sup>[4]</sup> |  | `[a: [b: 'c']].property('a.b') == 'c'` |
 | `pull` | [`_.pull`](https://lodash.com/docs#pull) | `[1, 2, 3, 1, 2, 3].pull(2, 3) == [1, 1]` |
+| `pullAt` | [`_.pullAt`](https://lodash.com/docs#pullAt) | `[5, 10, 15, 20].pullAt(1, 3) == [5, 15]` |
+| `removeElements`<sup>[5]</sup> | [`_.remove`](https://lodash.com/docs#remove) | `[1, 2, 3, 4].removeElements{ it % 2 } == [1, 3]` |
+| `rest` | [`_.rest`](https://lodash.com/docs#rest) | `[1, 2, 3].rest() == [2, 3]` |
+| [`tail`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#tail%28%29)<sup>[1]</sup> | [`_.tail`](https://lodash.com/docs#tail) | `[1, 2, 3].tail() == [2, 3]` |
 | `zipObject` | [`_.zipObject`](https://lodash.com/docs#zipObject) | `[['fred', 30], ['barney', 40]].zipObject() == [ 'fred': 30, 'barney': 40 ]` |
 
 > <sup>[1]</sup> Already implemented in Groovy
@@ -61,6 +65,8 @@ gradle test
 > <sup>[3]</sup> Only 'deep' semantics implemented
 >
 > <sup>[4]</sup> New in this Groovy library
+>
+> <sup>[5]</sup> Renamed from lodash because of collision with existing Groovy method
 
 ## <a name='todo'>Open Issues
 

@@ -178,13 +178,44 @@ import groovy.transform.*
    * <p><b>NOTE</b> the list is mutated.</p>
    */
   static List pull(final List self,
-                   final Object... values) {
+                   final Object... args) {
+    def values = args as Set
     for (int index = 0; index < self.size(); ) {
-      if (self.getAt(index) in values)
+      if (values.contains(self.getAt(index)))
         self.removeAt(index)
       else index++
     }
     return self
+  }
+
+  /**
+   * Removes all items at the provided indexes from the list.
+   *
+   * <p><b>NOTE</b> the list is mutated.</p>
+   */
+  static List pullAt(final List self,
+                     final Object... args) {
+    def indexes = args.flatten() as SortedSet
+    indexes.eachWithIndex { index, offset ->
+      self.removeAt(index - offset)
+    }
+    return self
+  }
+
+  /** Removes and returns items from the list that closure returms truthy for. */
+  static List removeElements(final List self,
+                             final Object... args) {
+    Closure fn = makeMatcher(args)
+    self.inject([]) { result, item ->
+      if (fn.call(item))
+        result << item
+      return result
+    }
+  }
+
+  /** Gets all but the first element of the list. */
+  static List rest(final List self) {
+    self.tail()
   }
 
   /**

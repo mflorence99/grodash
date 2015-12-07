@@ -146,6 +146,27 @@ class ListExtensionSpec extends Specification {
       [1, 2, 3, 1, 2, 3].pull(2, 3) == [1, 1]
   }
 
+  def 'pullAt() removes items at the provided indexes from the list'() {
+    expect:
+      [5, 10, 15, 20].pullAt(1, 3) == [5, 15]
+      [5, 10, 15, 20].pullAt([1, 3], [3, 1]) == [5, 15]
+  }
+
+  def 'removeElements() removes and returns matching items from the list'() {
+    expect:
+      [1, 2, 3, 4].removeElements{ it % 2 } == [1, 3]
+  }
+
+  def 'rest() gets all but the first element of the list'() {
+    expect:
+      [1, 2, 3].rest() == [2, 3]
+  }
+
+  def 'tail() and rest() are synonyms'() {
+    expect:
+      [1, 2, 3].tail() == [1, 2, 3].rest()
+  }
+
   def 'zipObject() returns an object composed from a list of names and values'() {
     expect:
       [['fred', 30], ['barney', 40]].zipObject() == [ 'fred': 30, 'barney': 40 ]
