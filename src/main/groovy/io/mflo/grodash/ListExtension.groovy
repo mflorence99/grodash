@@ -249,6 +249,21 @@ import groovy.transform.*
     return (index >= 0)? index : ((index + 1) * -1)
   }
 
+  /** Uses a binary search to determine the highest index at which value should be inserted into the list in order to maintain its sort order. */
+  static int sortedLastIndex(final List self,
+                             final Object value,
+                             final Object arg = null) {
+    Closure fn = makeComparator(arg)
+    int index = Collections.binarySearch(self, value, fn)
+    // NOTE: if value not found, Java says return is (-(insertion point) - 1)
+    if (index < 0)
+      return (index + 1) * -1
+    else {
+      while ((++index < self.size()) && (fn.call(self.getAt(index), value) == 0)) { }
+      return index
+    }
+  }
+
   /**
    * Returns an object composed from a list of names and values
    *

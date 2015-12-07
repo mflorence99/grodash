@@ -182,7 +182,21 @@ class ListExtensionSpec extends Specification {
       [1, 2, 3, 4, 5].sortedIndex(6) == 5
       [ [ 'x': 30 ], [ 'x': 50 ] ].sortedIndex([ 'x': 40 ], 'x') == 1
       ['thirty', 'fifty'].sortedIndex('forty') { dict.data[it] } == 1
+  }
 
+  def 'sortedLastIndex() finds highest insertion point for value in sorted list'() {
+    expect:
+      [4, 4, 5, 5].sortedLastIndex(5) == 4
+  }
+
+  def 'take() creates a slice of a list with n elements taken from the beginning'() {
+    expect:
+     [1, 2, 3].take(2) == [1, 2]
+  }
+
+  def 'takeRight() creates a slice of a list with n elements taken from the end'() {
+    expect:
+     [1, 2, 3].takeRight(2) == [2, 3]
   }
 
   def 'zipObject() returns an object composed from a list of names and values'() {

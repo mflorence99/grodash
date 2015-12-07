@@ -55,9 +55,12 @@ gradle test
 | `pullAt` | [`_.pullAt`](https://lodash.com/docs#pullAt) | `[5, 10, 15, 20].pullAt(1, 3) == [5, 15]` |
 | `removeElements`<sup>[5]</sup> | [`_.remove`](https://lodash.com/docs#remove) | `[1, 2, 3, 4].removeElements{ it % 2 } == [1, 3]` |
 | `rest` | [`_.rest`](https://lodash.com/docs#rest) | `[1, 2, 3].rest() == [2, 3]` |
-| [`tail`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#tail%28%29)<sup>[1]</sup> | [`_.tail`](https://lodash.com/docs#tail) | `[1, 2, 3].tail() == [2, 3]` |
 | `slice` | [`_.slice`](https://lodash.com/docs#slice) | `[1, 2, 3, 4, 5].slice(2, 4) == [3, 4]` |
-| `sortedIndex` | [`_.sortedIndex`](https://lodash.com/docs#sortedIndex) | `[ [ 'x': 30 ], [ 'x': 50 ] ].sortedIndex([ 'x': 40 ], 'x') == 1` |
+| `sortedIndex` | [`_.sortedIndex`](https://lodash.com/docs#sortedIndex) | `[['x': 30], ['x': 50]].sortedIndex(['x': 40], 'x') == 1` |
+| `sortedLastIndex` | [`_.sortedLastIndex`](https://lodash.com/docs#sortedLastIndex) | `[4, 4, 5, 5].sortedLastIndex(5) == 4` |
+| [`tail`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#tail%28%29)<sup>[1]</sup> | [`_.tail`](https://lodash.com/docs#tail) | `[1, 2, 3].tail() == [2, 3]` |
+| [`take`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#take%28int%29)<sup>[1]</sup> | [`_.take`](https://lodash.com/docs#take) | `[1, 2, 3].take(2) == [1, 2]` |
+| [`takeRight`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#takeRight%28int%29)<sup>[1]</sup> | [`_.takeRight`](https://lodash.com/docs#takeRight) | `[1, 2, 3].takeRight(2) == [2, 3]` |
 | `zipObject` | [`_.zipObject`](https://lodash.com/docs#zipObject) | `[['fred', 30], ['barney', 40]].zipObject() == [ 'fred': 30, 'barney': 40 ]` |
 
 > <sup>[1]</sup> Already implemented in Groovy
