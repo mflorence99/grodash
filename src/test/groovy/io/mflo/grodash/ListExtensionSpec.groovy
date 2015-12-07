@@ -174,6 +174,17 @@ class ListExtensionSpec extends Specification {
       [1, 2, 3, 4, 5].slice(2, 4) == [3, 4]
   }
 
+  def 'sortedIndex() finds lowest insertion point for value in sorted list'() {
+    def dict = [ 'data': [ 'thirty': 30, 'forty': 40, 'fifty': 50 ] ]
+    expect:
+      [1, 2, 3, 4, 5].sortedIndex(0) == 0
+      [1, 2, 3, 4, 5].sortedIndex(3) == 2
+      [1, 2, 3, 4, 5].sortedIndex(6) == 5
+      [ [ 'x': 30 ], [ 'x': 50 ] ].sortedIndex([ 'x': 40 ], 'x') == 1
+      ['thirty', 'fifty'].sortedIndex('forty') { dict.data[it] } == 1
+
+  }
+
   def 'zipObject() returns an object composed from a list of names and values'() {
     expect:
       [['fred', 30], ['barney', 40]].zipObject() == [ 'fred': 30, 'barney': 40 ]

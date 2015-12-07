@@ -9,6 +9,20 @@ import groovy.transform.*
  */
 @CompileDynamic class ListExtension {
 
+  /* useful identity closure */
+  static Closure identity = { it }
+
+  /* make a closure for comparing list values, lodash-style */
+  static Closure makeComparator = { arg ->
+    Closure fn = null
+    if (arg == null)
+      fn = identity
+    else if (arg instanceof Closure)
+      fn = arg
+    else fn = { path, obj -> obj[path] }.curry(arg)
+    return { obj, value -> fn.call(obj) <=> fn.call(value) }
+  }
+
   /* make a closure for matching list values, lodash-style */
   static Closure makeMatcher = { args ->
     def undefined = Math.random()
@@ -224,6 +238,15 @@ import groovy.transform.*
                     final int end = Integer.MAX_VALUE) {
     int stop = (end == Integer.MAX_VALUE)? self.size() : end
     return self.subList(start, stop).collect()
+  }
+
+  /** Uses a binary search to determine the lowest index at which value should be inserted into the list in order to maintain its sort order. */
+  static int sortedIndex(final List self,
+                         final Object value,
+                         final Object arg = null) {
+    int index = Collections.binarySearch(self, value, makeComparator(arg))
+    // NOTE: if value not found, Java says return is (-(insertion point) - 1)
+    return (index >= 0)? index : ((index + 1) * -1)
   }
 
   /**
