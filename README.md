@@ -63,6 +63,7 @@ gradle test
 | [`takeRight`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#takeRight%28int%29)<sup>[1]</sup> | [`_.takeRight`](https://lodash.com/docs#takeRight) | `[1, 2, 3].takeRight(2) == [2, 3]` |
 | `takeRightWhile`<sup>[2]</sup> | [`_.takeRightWhile`](https://lodash.com/docs#takeRightWhile) | `[1, 2, 3].takeRightWhile{ it > 1 } == [2, 3]` |
 | [`takeWhile`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#takeWhile%28groovy.lang.Closure%29)<sup>[1, 2]</sup> | [`_.takeWhile`](https://lodash.com/docs#takeWhile) | `[1, 2, 3].takeWhile{ it < 3 } == [1, 2]` |
+| `union` | [`_.union`](https://lodash.com/docs#union) | `[1, 2].union([4, 2], [2, 1]) == [1, 2, 4]` |
 | `zipObject` | [`_.zipObject`](https://lodash.com/docs#zipObject) | `[['fred', 30], ['barney', 40]].zipObject() == [ 'fred': 30, 'barney': 40 ]` |
 
 > <sup>[1]</sup> Already implemented in Groovy

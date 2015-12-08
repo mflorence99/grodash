@@ -217,6 +217,11 @@ class ListExtensionSpec extends Specification {
       flintstones.takeWhile([ 'active': false ]).pluck('name') == ['barney', 'fred']
   }
 
+  def 'union() creates a list of unique values, in order, from all of the provided lists'() {
+    expect:
+      [1, 2].union([4, 2], [2, 1]) == [1, 2, 4]
+  }
+
   def 'zipObject() returns an object composed from a list of names and values'() {
     expect:
       [['fred', 30], ['barney', 40]].zipObject() == [ 'fred': 30, 'barney': 40 ]

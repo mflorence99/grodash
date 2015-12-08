@@ -284,6 +284,14 @@ import groovy.transform.*
     return result
   }
 
+  /** Creates a list of unique values, in order, from all of the provided lists */
+  static List union(final List self,
+                    final List... others) {
+    def result = self as SortedSet
+    others.each { other -> result.addAll(other) }
+    return result as List
+  }
+
   /**
    * Returns an object composed from a list of names and values
    *
