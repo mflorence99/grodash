@@ -5,10 +5,10 @@ import spock.lang.*
 class ListExtensionSpec extends Specification {
 
   @Shared def flintstones = [
-    [ 'name': 'barney',  'active': false, 'spouse': [ 'name': 'betty' ] ],
-    [ 'name': 'fred',    'active': false, 'spouse': [ 'name': 'wilma' ] ],
-    [ 'name': 'pebbles', 'active': true ]
-  ]
+    ['name': 'barney',  'active': false, 'spouse': ['name': 'betty']],
+    ['name': 'fred',    'active': false, 'spouse': ['name': 'wilma']],
+    ['name': 'pebbles', 'active': true]
+]
 
   def 'chunk() splits a List into a List of Lists'() {
     def empty = []
@@ -44,7 +44,7 @@ class ListExtensionSpec extends Specification {
 
   def 'dropRightWhile() also emulates extended lodash semantics and syntax'() {
     expect:
-      flintstones.dropRightWhile([ 'name': 'pebbles', 'active': true ]).pluck('name') == ['barney', 'fred']
+      flintstones.dropRightWhile(['name': 'pebbles', 'active': true]).pluck('name') == ['barney', 'fred']
   }
 
   def 'dropWhile() creates a slice of the list, dropping items from the beginning'() {
@@ -55,7 +55,7 @@ class ListExtensionSpec extends Specification {
   def 'dropWhile() also emulates extended lodash semantics and syntax'() {
     expect:
       flintstones.dropWhile('spouse.name').pluck('name') == ['pebbles']
-      flintstones.dropWhile([ 'active': false ]).pluck('name') == ['pebbles']
+      flintstones.dropWhile(['active': false]).pluck('name') == ['pebbles']
   }
 
   def 'fill() fills items of a list with a value'() {
@@ -172,12 +172,12 @@ class ListExtensionSpec extends Specification {
   }
 
   def 'sortedIndex() finds lowest insertion point for value in sorted list'() {
-    def dict = [ 'data': [ 'thirty': 30, 'forty': 40, 'fifty': 50 ] ]
+    def dict = ['data': ['thirty': 30, 'forty': 40, 'fifty': 50]]
     expect:
       [1, 2, 3, 4, 5].sortedIndex(0) == 0
       [1, 2, 3, 4, 5].sortedIndex(3) == 2
       [1, 2, 3, 4, 5].sortedIndex(6) == 5
-      [ [ 'x': 30 ], [ 'x': 50 ] ].sortedIndex([ 'x': 40 ], 'x') == 1
+      [['x': 30], ['x': 50]].sortedIndex(['x': 40], 'x') == 1
       ['thirty', 'fifty'].sortedIndex('forty') { dict.data[it] } == 1
   }
 
@@ -203,7 +203,7 @@ class ListExtensionSpec extends Specification {
 
   def 'takeRightWhile() also emulates extended lodash semantics and syntax'() {
     expect:
-      flintstones.takeRightWhile([ 'name': 'pebbles', 'active': true ]).pluck('name') == ['pebbles']
+      flintstones.takeRightWhile(['name': 'pebbles', 'active': true]).pluck('name') == ['pebbles']
   }
 
   def 'takeWhile() creates a slice of the list, takeing items from the beginning'() {
@@ -214,7 +214,7 @@ class ListExtensionSpec extends Specification {
   def 'takeWhile() also emulates extended lodash semantics and syntax'() {
     expect:
       flintstones.takeWhile('spouse.name').pluck('spouse.name') == ['betty', 'wilma']
-      flintstones.takeWhile([ 'active': false ]).pluck('name') == ['barney', 'fred']
+      flintstones.takeWhile(['active': false]).pluck('name') == ['barney', 'fred']
   }
 
   def 'union() creates a list of unique values, in order, from all of the provided lists'() {
@@ -222,10 +222,24 @@ class ListExtensionSpec extends Specification {
       [1, 2].union([4, 2], [2, 1]) == [1, 2, 4]
   }
 
+  def 'uniq() a duplicate-free version of a list'() {
+    expect:
+      [2, 1, 2].uniq() == [2, 1]
+      [1, 2.5, 1.5, 2].uniq{ Math.floor(it) } == [1, 2.5]
+      [['x': 1], ['x': 2], ['x': 1]].uniq('x') == [['x': 1], ['x': 2]]
+  }
+
+  def 'unique() is a synonym for uniq()'() {
+    expect:
+      [2, 1, 2].unique() == [2, 1, 2].uniq()
+      [1, 2.5, 1.5, 2].unique{ Math.floor(it) } == [1, 2.5, 1.5, 2].uniq{ Math.floor(it) }
+      [['x': 1], ['x': 2], ['x': 1]].unique('x') == [['x': 1], ['x': 2], ['x': 1]].uniq('x')
+  }
+
   def 'zipObject() returns an object composed from a list of names and values'() {
     expect:
-      [['fred', 30], ['barney', 40]].zipObject() == [ 'fred': 30, 'barney': 40 ]
-      ['fred', 'barney'].zipObject([30, 40])  == [ 'fred': 30, 'barney': 40 ]
+      [['fred', 30], ['barney', 40]].zipObject() == ['fred': 30, 'barney': 40]
+      ['fred', 'barney'].zipObject([30, 40])  == ['fred': 30, 'barney': 40]
   }
 
 }

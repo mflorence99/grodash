@@ -12,14 +12,18 @@ import groovy.transform.*
   /* useful identity closure */
   static Closure identity = { it }
 
+  /* make a closure for accessing list values, lodash-style */
+  static Closure makeAccessor = { arg ->
+    if (arg == null)
+      return identity
+    else if (arg instanceof Closure)
+      return arg
+    else return { path, obj -> obj[path] }.curry(arg)
+  }
+
   /* make a closure for comparing list values, lodash-style */
   static Closure makeComparator = { arg ->
-    Closure fn = null
-    if (arg == null)
-      fn = identity
-    else if (arg instanceof Closure)
-      fn = arg
-    else fn = { path, obj -> obj[path] }.curry(arg)
+    Closure fn = ListExtension.makeAccessor(arg)
     return { obj, value -> fn.call(obj) <=> fn.call(value) }
   }
 
@@ -290,6 +294,26 @@ import groovy.transform.*
     def result = self as SortedSet
     others.each { other -> result.addAll(other) }
     return result as List
+  }
+
+  /** Creates a duplicate-free version of a list, using an optional closure to generate the criterion by which uniqueness is computed. */
+  static List uniq(final List self,
+                   final Object arg = null) {
+    def shadow = [] as Set
+    Closure fn = makeAccessor(arg)
+    return self.inject([]) { result, item ->
+      if (!shadow.contains(fn(item))) {
+        result << item
+        shadow << fn(item)
+      }
+      return result
+    }
+  }
+
+  /** unique() is a synonym for uniq() but it both already exists in Groovy and has lodash semantivcs */
+  static List unique(final List self,
+                     final Object arg = null) {
+    self.uniq(arg)
   }
 
   /**
