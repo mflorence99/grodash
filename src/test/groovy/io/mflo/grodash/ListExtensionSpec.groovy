@@ -246,6 +246,16 @@ class ListExtensionSpec extends Specification {
       [[2, 10, 200], [1, 20, 100]].unzipWith({ it.min() }) == [1, 10, 100]
   }
 
+  def 'without() removes all provided values from the list'() {
+    expect:
+      [1, 2, 3, 1, 2, 3].without(2, 3) == [1, 1]
+  }
+
+  def 'xor() returns the symmetric difference'() {
+    expect:
+      [1, 2].xor([4, 2]) == [1, 4]
+  }
+
   def 'zip() creates a list of grouped elements'() {
     expect:
       ['fred', 'barney'].zip([30, 40], [true, false]) == [['fred', 30, true], ['barney', 40, false]]

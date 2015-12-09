@@ -232,11 +232,12 @@ import groovy.transform.*
   static List removeElements(final List self,
                              final Object... args) {
     Closure fn = makeMatcher(args)
-    self.inject([]) { result, item ->
-      if (!fn.call(item))
-        result << item
-      return result
+    for (int index = 0; index < self.size(); ) {
+      if (fn.call(self[index]))
+        self.removeAt(index)
+      else index++
     }
+    return self
   }
 
   /** Gets all but the first element of the list. */
@@ -333,6 +334,28 @@ import groovy.transform.*
   static List unzipWith(final List self,
                         final Closure zipper) {
     self.head().zip(*(self.rest() + zipper))
+  }
+
+  /** Removes all provided values from the list. */
+  static List without(final List self,
+                      final Object... args) {
+    List result = self.collect()
+    def values = args as Set
+    for (int index = 0; index < self.size(); ) {
+      if (values.contains(result[index]))
+        result.removeAt(index)
+      else index++
+    }
+    return result
+  }
+
+  /** Creates a list of unique values that is the symmetric difference of the provided lists. */
+  static List xor(final List self,
+                  final List... others) {
+    def union = self.union(others) as Set
+    def intersection = self.intersection(others) as Set
+    union.removeAll(intersection)
+    return union as List
   }
 
   /** Creates a list of grouped items, the first of which contains the first items of the given lists, the second of which contains the second items of the given lists, and so on. */
