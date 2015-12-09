@@ -66,7 +66,11 @@ gradle test
 | `union` | [`_.union`](https://lodash.com/docs#union) | `[1, 2].union([4, 2], [2, 1]) == [1, 2, 4]` |
 | `uniq` | [`_.uniq`](https://lodash.com/docs#uniq) | `[1, 2.5, 1.5, 2].uniq{ Math.floor(it) } == [1, 2.5]` |
 | [`unique`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#unique%28%29)<sup>[1,2]</sup> | [`_.unique`](https://lodash.com/docs#unique) | `[2, 1, 2].unique() == [2, 1]` |
-| `zipObject` | [`_.zipObject`](https://lodash.com/docs#zipObject) | `[['fred', 30], ['barney', 40]].zipObject() == [ 'fred': 30, 'barney': 40 ]` |
+| `unzip` | [`_.unzip`](https://lodash.com/docs#unzip) | `[['fred', 30, true], ['barney', 40, false]].unzip() == [['fred', 'barney'], [30, 40], [true, false]]` |
+| `unzipWith` | [`_.unzipWith`](https://lodash.com/docs#unzipWith) | `[[2, 10, 200], [1, 20, 100]].unzipWith({ it.min() }) == [1, 10, 100]` |
+| `zip` | [`_.zip`](https://lodash.com/docs#zip) | `[['fred', 30, true], ['barney', 40, false]].zip() == ['fred', 'barney'].zip([30, 40], [true, false]) == [['fred', 30, true], ['barney', 40, false]]` |
+| `zipObject` | [`_.zipObject`](https://lodash.com/docs#zipObject) | `[['fred', 30], ['barney', 40]].zipObject() == ['fred': 30, 'barney': 40]` |
+| `zipWith` | [`_.zipWith`](https://lodash.com/docs#zipWith) | `[1, 2].zipWith([10, 20], [100, 200], { it.max() }) == [100, 200]` |
 
 > <sup>[1]</sup> Already implemented in Groovy
 >

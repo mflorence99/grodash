@@ -2,11 +2,8 @@ package io.mflo.grodash
 
 import groovy.transform.*
 
-/**
- * Lodash Array methods applied to Groovy Lists
- *
- * <p>Blah ... </p>
- */
+/** Lodash methods applied to Groovy Lists */
+
 @CompileDynamic class ListExtension {
 
   /* useful identity closure */
@@ -15,7 +12,7 @@ import groovy.transform.*
   /* make a closure for accessing list values, lodash-style */
   static Closure makeAccessor = { arg ->
     if (arg == null)
-      return identity
+      return ListExtension.identity
     else if (arg instanceof Closure)
       return arg
     else return { path, obj -> obj[path] }.curry(arg)
@@ -47,6 +44,17 @@ import groovy.transform.*
     else throw IllegalArgumentException("Match must be Closure, Map, property name or property name + value; found ${args}")
   }
 
+  /* make a closure for zipping and unzipping, lodash-style */
+  static Closure makeZipper = { tuples, args ->
+    Closure zipper = ListExtension.identity
+    args.each { arg ->
+      if (arg instanceof Closure)
+        zipper = (Closure)arg
+      else tuples << arg
+    }
+    return zipper
+  }
+
   /** Splits a list into a groups the length of size. If the list can’t be split evenly, the final chunk will be the remaining items. */
   static List chunk(final List self,
                     final int size = 1) {
@@ -54,7 +62,7 @@ import groovy.transform.*
     if ((size >= 1) && self.size()) {
       def limit = self.size() - 1
       for (int i = 0; i <= limit; i += size) {
-        def group = self.getAt(i..Math.min(limit, i + size - 1))
+        def group = self[i..Math.min(limit, i + size - 1)]
         if (group)
           result << group
         else break
@@ -80,7 +88,7 @@ import groovy.transform.*
   static List dropRightWhile(final List self,
                              final Object... args) {
     Closure fn = makeMatcher(args)
-    def result = self.collect()
+    List result = self.collect()
     while (fn.call(result[result.size() - 1]))
       result.removeAt(result.size() - 1)
     return result
@@ -90,7 +98,7 @@ import groovy.transform.*
   static List dropWhile(final List self,
                         final Object... args) {
     Closure fn = makeMatcher(args)
-    def result = self.collect()
+    List result = self.collect()
     while (fn.call(result[0]))
       result.removeAt(0)
     return result
@@ -199,7 +207,7 @@ import groovy.transform.*
                    final Object... args) {
     def values = args as Set
     for (int index = 0; index < self.size(); ) {
-      if (values.contains(self.getAt(index)))
+      if (values.contains(self[index]))
         self.removeAt(index)
       else index++
     }
@@ -225,7 +233,7 @@ import groovy.transform.*
                              final Object... args) {
     Closure fn = makeMatcher(args)
     self.inject([]) { result, item ->
-      if (fn.call(item))
+      if (!fn.call(item))
         result << item
       return result
     }
@@ -263,7 +271,7 @@ import groovy.transform.*
     if (index < 0)
       return (index + 1) * -1
     else {
-      while ((++index < self.size()) && (fn.call(self.getAt(index), value) == 0)) { }
+      while ((++index < self.size()) && (fn.call(self[index], value) == 0)) { }
       return index
     }
   }
@@ -272,9 +280,9 @@ import groovy.transform.*
   static List takeRightWhile(final List self,
                              final Object... args) {
     Closure fn = makeMatcher(args)
-    def result = []
+    List result = []
     for (int index = self.size() - 1; (index >= 0) && fn.call(self[index]); index--)
-      result << self.getAt(index)
+      result << self[index]
     return result.reverse()
   }
 
@@ -282,16 +290,16 @@ import groovy.transform.*
   static List takeWhile(final List self,
                         final Object... args) {
     Closure fn = makeMatcher(args)
-    def result = []
+    List result = []
     for (int index = 0; (index < self.size()) && fn.call(self[index]); index++)
-      result << self.getAt(index)
+      result << self[index]
     return result
   }
 
   /** Creates a list of unique values, in order, from all of the provided lists */
   static List union(final List self,
                     final List... others) {
-    def result = self as SortedSet
+    Set result = self as SortedSet
     others.each { other -> result.addAll(other) }
     return result as List
   }
@@ -316,6 +324,23 @@ import groovy.transform.*
     self.uniq(arg)
   }
 
+  /** unzip() is like zip() except that it accepts a list of grouped items and creates a list regrouping the items to their pre-zip configuration. */
+  static List unzip(final List self) {
+    self.head().zip(*self.rest())
+  }
+
+  /** unzipWith() is like unzip() except that it accepts a closure to specify how grouped values should be combined. */
+  static List unzipWith(final List self,
+                        final Closure zipper) {
+    self.head().zip(*(self.rest() + zipper))
+  }
+
+  /** Creates a list of grouped items, the first of which contains the first items of the given lists, the second of which contains the second items of the given lists, and so on. */
+  static List zip(final List self,
+                  final Object... args) {
+    self.zipWith(args)
+  }
+
   /**
    * Returns an object composed from a list of names and values
    *
@@ -325,11 +350,29 @@ import groovy.transform.*
    */
   static Map zipObject(final List self,
                        final List values = null) {
-    def result = [:]
+    Map result = [:]
     self.eachWithIndex { item, index ->
       if (values == null)
         result[item[0]] = item[1]
       else result[item] = values[index]
+    }
+    return result
+  }
+
+  /** zipWith() is like zip() except that it accepts a closure to specify how grouped values should be combined. */
+  static List zipWith(final List self,
+                      final Object... args) {
+    List result = []
+    List tuples = [self]
+    def zipper = makeZipper(tuples, args)
+    for (int index = 0; ;index++) {
+      List zipped = []
+      tuples.each { tuple ->
+        zipped << ((index < tuple.size())? tuple[index] : null)
+      }
+      if (zipped.removeElements{ it == null } != [])
+        result << zipper(zipped)
+      else break
     }
     return result
   }

@@ -151,7 +151,7 @@ class ListExtensionSpec extends Specification {
 
   def 'removeElements() removes and returns matching items from the list'() {
     expect:
-      [1, 2, 3, 4].removeElements{ it % 2 } == [1, 3]
+      [1, 2, 3, 4].removeElements{ it % 2 } == [2, 4]
   }
 
   def 'rest() gets all but the first element of the list'() {
@@ -236,10 +236,31 @@ class ListExtensionSpec extends Specification {
       [['x': 1], ['x': 2], ['x': 1]].unique('x') == [['x': 1], ['x': 2], ['x': 1]].uniq('x')
   }
 
+  def 'unzip() ungroups a list of grouped elements'() {
+    expect:
+      [['fred', 30, true], ['barney', 40, false]].unzip() == [['fred', 'barney'], [30, 40], [true, false]]
+  }
+
+  def 'unzipWith() ungroups a list of grouped elements'() {
+    expect:
+      [[2, 10, 200], [1, 20, 100]].unzipWith({ it.min() }) == [1, 10, 100]
+  }
+
+  def 'zip() creates a list of grouped elements'() {
+    expect:
+      ['fred', 'barney'].zip([30, 40], [true, false]) == [['fred', 30, true], ['barney', 40, false]]
+  }
+
   def 'zipObject() returns an object composed from a list of names and values'() {
     expect:
       [['fred', 30], ['barney', 40]].zipObject() == ['fred': 30, 'barney': 40]
       ['fred', 'barney'].zipObject([30, 40])  == ['fred': 30, 'barney': 40]
+  }
+
+  def 'zipWith() creates a list of grouped elements'() {
+    expect:
+      [1, 2].zipWith([10, 20], [100, 200], { it.max() }) == [100, 200]
+      ['fred', 'barney'].zipWith([30, 40], [true, false]) == [['fred', 30, true], ['barney', 40, false]]
   }
 
 }
