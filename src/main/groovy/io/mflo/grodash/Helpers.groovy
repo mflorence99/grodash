@@ -33,7 +33,9 @@ import groovy.transform.*
         (value == undefined)? obj.property(path) : (obj.property(path) == value)
       }
     }
-    if ((args.length == 1) && (args[0] instanceof Closure))
+    if (args.length == 0)
+      return Helpers.identity
+    else if ((args.length == 1) && (args[0] instanceof Closure))
       return args[0]
     else if ((args.length == 1) && (args[0] instanceof Map))
       return matcher.curry(args[0])

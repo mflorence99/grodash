@@ -8,7 +8,23 @@ class ListExtensionSpec extends Specification {
     ['name': 'barney',  'active': false, 'spouse': ['name': 'betty']],
     ['name': 'fred',    'active': false, 'spouse': ['name': 'wilma']],
     ['name': 'pebbles', 'active': true]
-]
+  ]
+
+  def 'all() returns true if all items pass predicate'() {
+    expect:
+      [true, 1, null, 'yes'].all() == false
+      flintstones.all(['name': 'barney', 'active': false]) == false
+      flintstones.all('spouse') == false
+      flintstones.all('name') == true
+  }
+
+  def 'any() returns true if any items pass predicate'() {
+    expect:
+      [true, 1, null, 'yes'].any() == true
+      flintstones.any(['name': 'barney', 'active': false]) == true
+      flintstones.any('spouse.name', 'betty') == true
+      flintstones.any('user') == false
+  }
 
   def 'chunk() splits a List into a List of Lists'() {
     def empty = []
@@ -56,6 +72,15 @@ class ListExtensionSpec extends Specification {
     expect:
       flintstones.dropWhile('spouse.name').pluck('name') == ['pebbles']
       flintstones.dropWhile(['active': false]).pluck('name') == ['pebbles']
+  }
+
+  def 'every() is a synonym for all()'() {
+    expect:
+      [true, 1, null, 'yes'].every() == [true, 1, null, 'yes'].all()
+      flintstones.every(['name': 'barney', 'active': false]) ==
+        flintstones.all(['name': 'barney', 'active': false])
+      flintstones.every('spouse') == flintstones.all('spouse')
+      flintstones.every('name') == flintstones.all('name')
   }
 
   def 'fill() fills items of a list with a value'() {
@@ -169,6 +194,15 @@ class ListExtensionSpec extends Specification {
       [1, 2, 3, 4, 5].slice() == [1, 2, 3, 4, 5]
       [1, 2, 3, 4, 5].slice(2) == [3, 4, 5]
       [1, 2, 3, 4, 5].slice(2, 4) == [3, 4]
+  }
+
+  def 'some() is a synonym for any()'() {
+    expect:
+      [true, 1, null, 'yes'].some() == [true, 1, null, 'yes'].any()
+      flintstones.some(['name': 'barney', 'active': false]) ==
+        flintstones.any(['name': 'barney', 'active': false])
+      flintstones.some('spouse.name', 'betty') == flintstones.any('spouse.name', 'betty')
+      flintstones.some('user') == flintstones.any('user')
   }
 
   def 'sortedIndex() finds lowest insertion point for value in sorted list'() {

@@ -8,6 +8,29 @@ import static io.mflo.grodash.Helpers.*
 
 @CompileDynamic class ListExtension {
 
+  /** Checks if predicate returns truthy for all items of the list. */
+  static boolean all(final List self,
+                     final Object... args) {
+    boolean allTrue = true
+    Closure fn = makeMatcher(args)
+    for (int index = 0; index < self.size(); index++) {
+      allTrue &= !!fn.call(self[index])
+      if (!allTrue) break;
+    }
+    return allTrue
+  }
+
+  /** Checks if predicate returns truthy for any items of the list. */
+  static boolean any(final List self,
+                     final Object... args) {
+    boolean anyTrue = false
+    Closure fn = makeMatcher(args)
+    for (int index = 0; index < self.size(); index++) {
+      anyTrue |= !!fn.call(self[index])
+    }
+    return anyTrue
+  }
+
   /** Splits a list into a groups the length of size. If the list can’t be split evenly, the final chunk will be the remaining items. */
   static List chunk(final List self,
                     final int size = 1) {
@@ -55,6 +78,12 @@ import static io.mflo.grodash.Helpers.*
     while (fn.call(result[0]))
       result.removeAt(0)
     return result
+  }
+
+  /** every() is a synonym for all(). */
+  static boolean every(final List self,
+                       final Object... args) {
+    self.all(args)
   }
 
   /**
@@ -204,6 +233,12 @@ import static io.mflo.grodash.Helpers.*
                     final int end = Integer.MAX_VALUE) {
     int stop = (end == Integer.MAX_VALUE)? self.size() : end
     return self.subList(start, stop).collect()
+  }
+
+  /** some() is a synonym for any(). */
+  static boolean some(final List self,
+                      final Object... args) {
+    self.any(args)
   }
 
   /** Uses a binary search to determine the lowest index at which value should be inserted into the list in order to maintain its sort order. */
