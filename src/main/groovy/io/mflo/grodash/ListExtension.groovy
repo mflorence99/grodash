@@ -31,6 +31,12 @@ import static io.mflo.grodash.Helpers.*
     return anyTrue
   }
 
+  /** Creates a list of items corresponding to the given indexes of the list. */
+  static List at(final List self,
+                 final Object... indexes) {
+    indexes.flatten().inject([]) { result, index -> result << self[index] }
+  }
+
   /** Splits a list into a groups the length of size. If the list can’t be split evenly, the final chunk will be the remaining items. */
   static List chunk(final List self,
                     final int size = 1) {

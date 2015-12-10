@@ -26,6 +26,12 @@ class ListExtensionSpec extends Specification {
       flintstones.any('user') == false
   }
 
+  def 'at() extracts the given indexes from the list'() {
+    expect:
+      ['a', 'b', 'c'].at(0, 2) == ['a', 'c']
+      ['barney', 'fred', 'pebbles'].at([0, 2]) == ['barney', 'pebbles']
+  }
+
   def 'chunk() splits a List into a List of Lists'() {
     def empty = []
     def list = [1, 2, 3, 4, 5]

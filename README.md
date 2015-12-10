@@ -30,6 +30,9 @@ gradle test
 
 | Groovy | lodash | Expect |
 | --- | --- | --- |
+| `all` | [`_.all`](https://lodash.com/docs#all) | `[true, 1, null, 'yes'].all() == false` |
+| [`any`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#any%28int%29)<sup>[1]</sup> | [`_.any`](https://lodash.com/docs#any) | `[true, 1, null, 'yes'].any() == true` |
+| `at` | [`_.at`](https://lodash.com/docs#at) | `['a', 'b', 'c'].at(0, 2) == ['a', 'c']` |
 | `chunk` | [`_.chunk`](https://lodash.com/docs#chunk) | `[1, 2, 3].chunk(2) == [[1, 2], [3]]` |
 | `compact` | [`_.compact`](https://lodash.com/docs#compact) | `[0, 1, false, 2, '', 3].compact() == [1, 2, 3]` |
 | `difference` | [`_.difference`](https://lodash.com/docs#difference) | `[1, 2, 3].difference([4, 2]) == [1, 3]` |
@@ -37,6 +40,7 @@ gradle test
 | [`dropRight`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#dropRight%28int%29)<sup>[1]</sup> | [`_.dropRight`](https://lodash.com/docs#dropRight) | `[1, 2, 3].dropRight(2) == [1]` |
 | `dropRightWhile`<sup>[2]</sup> | [`_.dropRightWhile`](https://lodash.com/docs#dropRightWhile) | `[1, 3, 2].dropRightWhile{ it < 3 } == [1, 3]` |
 | [`dropWhile`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#dropWhile%28groovy.lang.Closure%29)<sup>[1, 2]</sup> | [`_.dropWhile`](https://lodash.com/docs#dropWhile) | `[1, 3, 2].dropWhile{ it < 3 } == [3, 2]` |
+| [`every`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#every%28int%29)<sup>[1]</sup> | [`_.every`](https://lodash.com/docs#every) | `[true, 1, null, 'yes'].every() == false` |
 | `findIndex` | [`_.findIndex`](https://lodash.com/docs#findIndex) | `[3, 2, 1].findIndex{ it == 3 } == 0` |
 | `findLastIndex` | [`_.findLastIndex`](https://lodash.com/docs#findLastIndex) | `[3, 2, 1].findLastIndex{ it == 1 } == 2` |
 | [`first`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#first%28%29)<sup>[1]</sup> | [`_.first`](https://lodash.com/docs#first) | `[1, 2, 3].first() == 1` |
@@ -56,6 +60,7 @@ gradle test
 | `removeElements`<sup>[5]</sup> | [`_.remove`](https://lodash.com/docs#remove) | `[1, 2, 3, 4].removeElements{ it % 2 } == [1, 3]` |
 | `rest` | [`_.rest`](https://lodash.com/docs#rest) | `[1, 2, 3].rest() == [2, 3]` |
 | `slice` | [`_.slice`](https://lodash.com/docs#slice) | `[1, 2, 3, 4, 5].slice(2, 4) == [3, 4]` |
+| `some` | [`_.some`](https://lodash.com/docs#some) | `[true, 1, null, 'yes'].any() == true` |
 | `sortedIndex` | [`_.sortedIndex`](https://lodash.com/docs#sortedIndex) | `[['x': 30], ['x': 50]].sortedIndex(['x': 40], 'x') == 1` |
 | `sortedLastIndex` | [`_.sortedLastIndex`](https://lodash.com/docs#sortedLastIndex) | `[4, 4, 5, 5].sortedLastIndex(5) == 4` |
 | [`tail`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#tail%28%29)<sup>[1]</sup> | [`_.tail`](https://lodash.com/docs#tail) | `[1, 2, 3].tail() == [2, 3]` |
