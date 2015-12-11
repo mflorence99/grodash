@@ -53,6 +53,15 @@ import static io.mflo.grodash.Helpers.*
     return result
   }
 
+  /** Creates a list of items by running each item in the source list through a closure. */
+  static List collect(final List self,
+                      final Object arg = null) {
+    List result = []
+    Closure fn = makeAccessor(arg)
+    self.each { result << fn(it) }
+    return result
+  }
+
   /** Creates a new list with all falsey values removed, according to Groovy truth. */
   static List compact(final List self) {
     self.findAll()
@@ -169,7 +178,13 @@ import static io.mflo.grodash.Helpers.*
     return (index >= 0)? index : -1
   }
 
-  /** See zipObject */
+  /** map() is a synonym for collect() */
+  static List map(final List self,
+                  final Object arg = null) {
+    self.collect(arg)
+  }
+
+  /** Sobject() is a synonym for zipObject() */
   static Map object(final List self,
                     final List values = null) {
     self.zipObject(values)

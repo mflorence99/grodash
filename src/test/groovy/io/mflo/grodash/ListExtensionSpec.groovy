@@ -47,6 +47,13 @@ class ListExtensionSpec extends Specification {
       list.chunk(6) == [[1, 2, 3, 4, 5]]
   }
 
+  def 'collect() transforms each item in a list'(){
+    expect:
+      [1, 2].collect() == [1, 2]
+      [1, 2, 3].collect{ it * 3 } == [3, 6, 9]
+      flintstones.collect('name') == ['barney', 'fred', 'pebbles']
+  }
+
   def 'compact() creates a new list with all falsey values removed'() {
     def list = [0, 1, false, 2, '', 3];
     expect:
@@ -154,6 +161,13 @@ class ListExtensionSpec extends Specification {
       [1, 2, 1, 2].lastIndexOf(2, 2) == 1
       [1, 2, 1, 2].lastIndexOf(2, -3) == 1
       [1, 2, 1, 2].lastIndexOf(3) == -1
+  }
+
+  def 'map() is a synonym for collect()'(){
+    expect:
+      [1, 2].map() == [1, 2].collect()
+      [1, 2, 3].map{ it * 3 } == [1, 2, 3].collect{ it * 3 }
+      flintstones.map('name') == flintstones.collect('name')
   }
 
   def 'object() is a synonym for zipObject'() {
