@@ -61,6 +61,12 @@ class ListExtensionSpec extends Specification {
       list.compact() == list.findAll()
   }
 
+  def 'contains() checks if a value is cintained in the list'() {
+    expect:
+      [1, 2, 3].contains(1) == true
+      [1, 2, 3].contains(1, 2) == false
+  }
+
   def 'difference() creates a new list from unique values not in provided lists'() {
     expect:
       [1, 2, 3].difference([4, 2]) == [1, 3]
@@ -129,6 +135,12 @@ class ListExtensionSpec extends Specification {
   def 'flattendDeep() recursively flattens a nested list'() {
     expect:
       [1, [2, 3, [4]]].flattenDeep() == [1, 2, 3, 4]
+  }
+
+  def 'includes() is a synonym for contains()'() {
+    expect:
+      [1, 2, 3].includes(1) == [1, 2, 3].contains(1)
+      [1, 2, 3].includes(1, 2) == [1, 2, 3].contains(1, 2)
   }
 
   def 'indexOf() gets the index of the first occurence of value, starting from beginning'() {

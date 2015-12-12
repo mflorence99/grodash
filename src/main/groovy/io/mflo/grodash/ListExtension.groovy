@@ -67,6 +67,17 @@ import static io.mflo.grodash.Helpers.*
     self.findAll()
   }
 
+  /**
+   * Checks if the supplied value is contained in the list.
+   *
+   * <p><b>NOTE</b> if fromIndex is negative, it's used as an offset from the end.</p>
+   */
+  static boolean contains(final List self,
+                          final Object value,
+                          final int fromIndex = 0) {
+    self.indexOf(value, fromIndex) != -1
+  }
+
   /** Creates a new list from the unique values not included in the other provided lists. */
   static List difference(final List self,
                          final List... excludes) {
@@ -137,6 +148,13 @@ import static io.mflo.grodash.Helpers.*
   /** Recursively flattens a nested list. */
   static List flattenDeep(final List self) {
     self.flatten()
+  }
+
+  /** includes() is a synonym for contains(). */
+  static boolean includes(final List self,
+                          final Object value,
+                          final int fromIndex = 0) {
+    self.contains(value, fromIndex) 
   }
 
   /**

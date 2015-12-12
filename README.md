@@ -36,6 +36,7 @@ gradle test
 | `chunk` | [`_.chunk`](https://lodash.com/docs#chunk) | `[1, 2, 3].chunk(2) == [[1, 2], [3]]` |
 | [`collect`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#collect%28groovy.lang.Closure%29)<sup>[1,2]</sup> | [`_.collect`](https://lodash.com/docs#collect) | `[1, 2, 3].collect{ it * 3 } == [3, 6, 9]` |
 | `compact` | [`_.compact`](https://lodash.com/docs#compact) | `[0, 1, false, 2, '', 3].compact() == [1, 2, 3]` |
+| [`contains`](http://docs.oracle.com/javase/8/docs/api/java/util/Collection.html#contains-java.lang.Object-)<sup>[1,2]</sup> | [`_.contains`](https://lodash.com/docs#contains) | `[1, 2, 3].contains(1) == true` |
 | `difference` | [`_.difference`](https://lodash.com/docs#difference) | `[1, 2, 3].difference([4, 2]) == [1, 3]` |
 | [`drop`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#drop%28int%29)<sup>[1]</sup> | [`_.drop`](https://lodash.com/docs#drop) | `[1, 2, 3].drop(2) == [3]` |
 | [`dropRight`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#dropRight%28int%29)<sup>[1]</sup> | [`_.dropRight`](https://lodash.com/docs#dropRight) | `[1, 2, 3].dropRight(2) == [1]` |
@@ -48,6 +49,7 @@ gradle test
 | [`flatten`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#flatten%28%29)<sup>[1, 3]</sup> | [`_.flatten`](https://lodash.com/docs#flatten) | `[1, [2, 3, [4]]].flatten() == [1, 2, 3, 4]` |
 | `flattenDeep` | [`_.flattenDeep`](https://lodash.com/docs#flattenDeep) | `[1, [2, 3, [4]]].flattenDeep() == [1, 2, 3, 4]` |
 | [`head`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#head%28%29)<sup>[1]</sup> | [`_.head`](https://lodash.com/docs#head) | `[1, 2, 3].head() == 1` |
+| `includes` | [`_.includes`](https://lodash.com/docs#includes) | `[1, 2, 3].includes(1, 2) == false` |
 | `indexOf` | [`_.indexOf`](https://lodash.com/docs#indexOf) | `[1, 2, 1, 2].indexOf(2) == 1` |
 | `initial` | [`_.initial`](https://lodash.com/docs#initial) | `[1, 2, 3].initial() == [1, 2]` |
 | `intersection` | [`_.intersection`](https://lodash.com/docs#intersection) | `[1, 2].intersection([4, 2], [2, 1]) == [2]` |
