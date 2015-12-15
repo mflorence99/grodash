@@ -32,9 +32,11 @@ gradle test
 
 | Groovy | lodash | Expect |
 | --- | --- | --- |
+| `after` | [`_.after`](https://lodash.com/docs#after) | `(0..9).inject('', { p, q -> p += q }.after(6)) == '56789'` |
 | `all` | [`_.all`](https://lodash.com/docs#all) | `[true, 1, null, 'yes'].all() == false` |
 | [`any`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#any%28groovy.lang.Closure%29)<sup>[1]</sup> | [`_.any`](https://lodash.com/docs#any) | `[true, 1, null, 'yes'].any() == true` |
 | `at` | [`_.at`](https://lodash.com/docs#at) | `['a', 'b', 'c'].at(0, 2) == ['a', 'c']` |
+| `before` | [`_.before`](https://lodash.com/docs#before) | `(0..9).inject('', { p, q -> p += q }.before(6)) == '01234'` |
 | `chunk` | [`_.chunk`](https://lodash.com/docs#chunk) | `[1, 2, 3].chunk(2) == [[1, 2], [3]]` |
 | [`collect`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#collect%28groovy.lang.Closure%29)<sup>[1,2]</sup> | [`_.collect`](https://lodash.com/docs#collect) | `[1, 2, 3].collect{ it * 3 } == [3, 6, 9]` |
 | `compact` | [`_.compact`](https://lodash.com/docs#compact) | `[0, 1, false, 2, '', 3].compact() == [1, 2, 3]` |
