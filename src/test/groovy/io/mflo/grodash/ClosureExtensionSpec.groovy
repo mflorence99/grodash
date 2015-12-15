@@ -20,6 +20,11 @@ class ClosureExtensionSpec extends Specification {
       times == 1
   }
 
+  def 'ary() calls the supplied closure with a maximum of N arguments'() {
+    expect:
+      ['6', '8', '10'].map(Integer.&parseInt.ary(1)) == [6, 8, 10]
+  }
+
   def 'before() calls the supplied closure until it has been invoked N times (README test)'() {
     expect:
       (0..9).inject('', { p, q -> p += q }.before(6)) == '01234'

@@ -35,6 +35,7 @@ gradle test
 | `after` | [`_.after`](https://lodash.com/docs#after) | `(0..9).inject('', { p, q -> p += q }.after(6)) == '56789'` |
 | `all` | [`_.all`](https://lodash.com/docs#all) | `[true, 1, null, 'yes'].all() == false` |
 | [`any`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#any%28groovy.lang.Closure%29)<sup>[1]</sup> | [`_.any`](https://lodash.com/docs#any) | `[true, 1, null, 'yes'].any() == true` |
+| `ary` | [`_.ary`](https://lodash.com/docs#ary) | `['6', '8', '10'].map(Integer.&parseInt.ary(1)) == [6, 8, 10]` |
 | `at` | [`_.at`](https://lodash.com/docs#at) | `['a', 'b', 'c'].at(0, 2) == ['a', 'c']` |
 | `before` | [`_.before`](https://lodash.com/docs#before) | `(0..9).inject('', { p, q -> p += q }.before(6)) == '01234'` |
 | `chunk` | [`_.chunk`](https://lodash.com/docs#chunk) | `[1, 2, 3].chunk(2) == [[1, 2], [3]]` |

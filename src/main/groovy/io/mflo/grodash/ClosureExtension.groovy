@@ -13,6 +13,12 @@ import groovy.transform.*
     return { Object... args -> (--n > 0)? args[0] : self(*args) }
   }
 
+  /** Creates a closure that calls the supplied closure with a maximum of N arguments. */
+  static Closure ary(final Closure self,
+                     final int n) {
+    return { Object... args -> self(*(args.take(n))) }
+  }
+
   /** Creates a closure that calls the supplied closure until it has been invoked N times. */
   static Closure before(final Closure self,
                        final int times) {
