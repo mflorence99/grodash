@@ -20,10 +20,16 @@ class MapExtensionSpec extends Specification {
       fred.contains('fred') == true
   }
 
-  def 'includes() is a synont=ym for contains()'() {
+  def 'includes() is a synonym for contains()'() {
     expect:
       barney.includes(36) == barney.contains(36)
       fred.includes('fred') == fred.contains('fred')
+  }
+
+  def 'intersection() creates a map of unique key/value pairs'() {
+    expect:
+      [1: 1, 2: 2, 3: 3, 4: 4, 5: 5].intersection([4: 4, 5: 5, 6: 6, 7: 7, 8: 8]) == [4: 4, 5: 5]
+      [1: 1, 2: 2, 3: 3, 4: 4].intersection( [1: 1.0, 2: 2, 5: 5] ) == [1: 1, 2: 2]
   }
 
   def 'property() gets a named property value by its path'() {

@@ -29,6 +29,12 @@ import groovy.transform.*
     self.contains(value)
   }
 
+  /** Creates a map of unique key/values that are included in all of the provided maps. */
+  static Map intersection(final Map self,
+                          final Map... others) {
+    others.inject(self) { result, other -> result.intersect(other) }
+  }
+
   /** Deep access object by property as in a.b.c */
   static Object property(final Map self,
                          final String path) {

@@ -61,10 +61,17 @@ class ListExtensionSpec extends Specification {
       list.compact() == list.findAll()
   }
 
-  def 'contains() checks if a value is cintained in the list'() {
+  def 'contains() checks if a value is contained in the list'() {
     expect:
       [1, 2, 3].contains(1) == true
       [1, 2, 3].contains(1, 2) == false
+  }
+
+  def 'countBy() counts the occurrences of items in a list'() {
+    expect:
+      [4.3, 6.1, 6.4].countBy { Math.floor(it) as String } == ['4.0': 1, '6.0': 2]
+      ['this', 'that', 'this'].countBy() == ['this': 2, 'that': 1]
+      flintstones.countBy('spouse.name') == ['betty': 1, 'wilma': 1]
   }
 
   def 'difference() creates a new list from unique values not in provided lists'() {

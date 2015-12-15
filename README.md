@@ -28,6 +28,8 @@ gradle test
 
 ## <a name='index'>Groovy Methods and lodash Equivalents
 
+> The unit tests are a great repository of more complete examples.
+
 | Groovy | lodash | Expect |
 | --- | --- | --- |
 | `all` | [`_.all`](https://lodash.com/docs#all) | `[true, 1, null, 'yes'].all() == false` |
@@ -37,6 +39,7 @@ gradle test
 | [`collect`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#collect%28groovy.lang.Closure%29)<sup>[1,2]</sup> | [`_.collect`](https://lodash.com/docs#collect) | `[1, 2, 3].collect{ it * 3 } == [3, 6, 9]` |
 | `compact` | [`_.compact`](https://lodash.com/docs#compact) | `[0, 1, false, 2, '', 3].compact() == [1, 2, 3]` |
 | [`contains`](http://docs.oracle.com/javase/8/docs/api/java/util/Collection.html#contains-java.lang.Object-)<sup>[1,2]</sup> | [`_.contains`](https://lodash.com/docs#contains) | `[1, 2, 3].contains(1) == true` |
+| [`countBy`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#countBy%28groovy.lang.Closure%29)<sup>[1,6]</sup> | [`_.countBy`](https://lodash.com/docs#countBy) | `[4.3, 6.1, 6.4].countBy { Math.floor(it) as String } == ['4.0': 1, '6.0': 2]` |
 | `difference` | [`_.difference`](https://lodash.com/docs#difference) | `[1, 2, 3].difference([4, 2]) == [1, 3]` |
 | [`drop`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#drop%28int%29)<sup>[1]</sup> | [`_.drop`](https://lodash.com/docs#drop) | `[1, 2, 3].drop(2) == [3]` |
 | [`dropRight`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#dropRight%28int%29)<sup>[1]</sup> | [`_.dropRight`](https://lodash.com/docs#dropRight) | `[1, 2, 3].dropRight(2) == [1]` |
@@ -93,6 +96,8 @@ gradle test
 > <sup>[4]</sup> New in this Groovy library
 >
 > <sup>[5]</sup> Renamed from lodash because of collision with existing Groovy method
+>
+> <sup>[6]</sup> Syntax and semantics adapted to Groovy
 
 ## <a name='todo'>Open Issues
 

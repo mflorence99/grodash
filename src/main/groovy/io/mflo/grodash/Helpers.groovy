@@ -15,7 +15,7 @@ import groovy.transform.*
       return Helpers.identity
     else if (arg instanceof Closure)
       return arg
-    else return { path, obj -> obj[path] }.curry(arg)
+    else return { path, obj -> obj.property(path) }.curry(arg)
   }
 
   /* make a closure for comparing list values, lodash-style */
