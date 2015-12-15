@@ -8,8 +8,8 @@ import groovy.transform.*
 
   /** Creates a closure that calls the supplied closure after it has been invoked N times. */
   static Closure after(final Closure self,
-                       final int times) {
-    int n = times
+                       final long times) {
+    long n = times
     return { Object... args -> (--n > 0)? args[0] : self(*args) }
   }
 
@@ -21,10 +21,19 @@ import groovy.transform.*
 
   /** Creates a closure that calls the supplied closure until it has been invoked N times. */
   static Closure before(final Closure self,
-                       final int times) {
-    int n = times
+                        final long times) {
+    long n = times
     def result = null
     return { Object... args -> (--n > 0)? (result = self(*args)) : result }
+  }
+
+  static def delay(final Closure self,
+                   final long wait,
+                   final Object... args) {
+    Thread.startDaemon {
+      Thread.sleep(wait)
+      self(*args)
+    }
   }
 
 }

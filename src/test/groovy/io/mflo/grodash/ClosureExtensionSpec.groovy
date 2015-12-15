@@ -46,4 +46,9 @@ class ClosureExtensionSpec extends Specification {
       flintstones[3].index == null
   }
 
+  def 'delay() calls the supplied closure after N ms'() {
+    expect:
+      ({ println it }).delay(1000, 'Hello, World!')
+  }
+
 }
