@@ -27,6 +27,15 @@ import groovy.transform.*
     return { Object... args -> (--n > 0)? (result = self(*args)) : result }
   }
 
+  /** Calls the suppled closure asynchronously. */
+  static def defer(final Closure self,
+                   final Object... args) {
+    Thread.startDaemon {
+      self(*args)
+    }
+  }
+
+  /** Calls the supplied closure after N milliseconds. */
   static def delay(final Closure self,
                    final long wait,
                    final Object... args) {

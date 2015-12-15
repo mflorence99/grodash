@@ -46,9 +46,14 @@ class ClosureExtensionSpec extends Specification {
       flintstones[3].index == null
   }
 
+  def 'defer() calls the supplied closure asynchronously'() {
+    expect:
+      ({ println it }).defer('Goodbye, cruel world!')
+  }
+
   def 'delay() calls the supplied closure after N ms'() {
     expect:
-      ({ println it }).delay(1000, 'Hello, World!')
+      ({ println it }).delay(1, 'Hello, World!')
   }
 
 }

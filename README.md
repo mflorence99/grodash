@@ -43,6 +43,7 @@ gradle test
 | `compact` | [`_.compact`](https://lodash.com/docs#compact) | `[0, 1, false, 2, '', 3].compact() == [1, 2, 3]` |
 | [`contains`](http://docs.oracle.com/javase/8/docs/api/java/util/Collection.html#contains-java.lang.Object-)<sup>[1,2]</sup> | [`_.contains`](https://lodash.com/docs#contains) | `[1, 2, 3].contains(1) == true` |
 | [`countBy`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#countBy%28groovy.lang.Closure%29)<sup>[1,6]</sup> | [`_.countBy`](https://lodash.com/docs#countBy) | `[4.3, 6.1, 6.4].countBy { Math.floor(it) as String } == ['4.0': 1, '6.0': 2]` |
+| `defer` | [`_.defer`](https://lodash.com/docs#defer) | `({ println it }).defer('Hello, World!') // prints Hello, World asynchronously` |
 | `delay` | [`_.delay`](https://lodash.com/docs#delay) | `({ println it }).delay(1000, 'Hello, World!') // prints Hello, World after 1 sec` |
 | `difference` | [`_.difference`](https://lodash.com/docs#difference) | `[1, 2, 3].difference([4, 2]) == [1, 3]` |
 | [`drop`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#drop%28int%29)<sup>[1]</sup> | [`_.drop`](https://lodash.com/docs#drop) | `[1, 2, 3].drop(2) == [3]` |
