@@ -45,4 +45,9 @@ import groovy.transform.*
     }
   }
 
+  /** Creates a closure that negates the return of the supplied closure. */
+  static Closure negate(final Closure self) {
+    return { Object... args -> !self(*args) }
+  }
+
 }

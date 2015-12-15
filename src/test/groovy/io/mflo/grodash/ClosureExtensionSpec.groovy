@@ -56,4 +56,9 @@ class ClosureExtensionSpec extends Specification {
       ({ println it }).delay(1, 'Hello, World!')
   }
 
+  def 'negate() negates the return of the supplied closure'() {
+    expect:
+      [1, 2, 3].map({ n -> n % 2 == 0 }.negate()) == [true, false, true]
+  }
+
 }

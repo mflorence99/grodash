@@ -65,6 +65,7 @@ gradle test
 | `lastIndexOf` | [`_.lastIndexOf`](https://lodash.com/docs#lastIndexOf) | `[1, 2, 1, 2].lastIndexOf(3) == 1` |
 | `object` | [`_.object`](https://lodash.com/docs#object) | `[['fred', 30], ['barney', 40]].object() == [ 'fred': 30, 'barney': 40 ]` |
 | `map` | [`_.map`](https://lodash.com/docs#map) | `[1, 2, 3].map{ it * 3 } == [3, 6, 9]` |
+| `negate` | [`_.negate`](https://lodash.com/docs#negate) | `[1, 2, 3].map({ n -> n % 2 == 0 }.negate()) == [true, false, true]` |
 | `object` | [`_.object`](https://lodash.com/docs#object) | `[['fred', 30], ['barney', 40]].object() == ['fred': 30, 'barney': 40]` |
 | `pluck` | [`_.pluck`](https://lodash.com/docs#pluck) | `[[a: 1], [a: 2]].pluck('a') == [1, 2]` |
 | `property`<sup>[4]</sup> |  | `[a: [b: 'c']].property('a.b') == 'c'` |
