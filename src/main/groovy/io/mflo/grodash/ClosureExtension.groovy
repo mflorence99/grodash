@@ -56,4 +56,11 @@ import groovy.transform.*
     return { Object... args -> result ?: (result = self(*args)) }
   }
 
+  /** Calls the supplied closure N times. */
+  static def times(final Closure self,
+                   final long times,
+                   final Object... args) {
+    (0..times-1).inject([]) { result, n -> result << self(args) }
+  }
+
 }

@@ -2,6 +2,8 @@ package io.mflo.grodash
 
 import spock.lang.*
 
+import static io.mflo.grodash.Closures.*
+
 class ClosureExtensionSpec extends Specification {
 
   def 'after() calls the supplied closure after it has been invoked N times (README test)'() {
@@ -64,6 +66,12 @@ class ClosureExtensionSpec extends Specification {
   def 'once() calls the supplied closure only once'() {
     expect:
       (0..9).inject('', { p, q -> p += q }.once()) == '0'
+  }
+
+  def 'times() calls the supplied closure N times'() {
+    expect:
+      constant(42).times(5) == [42, 42, 42, 42, 42]
+      identity.times(5, 42) == [42, 42, 42, 42, 42]
   }
 
 }
