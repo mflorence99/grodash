@@ -61,4 +61,9 @@ class ClosureExtensionSpec extends Specification {
       [1, 2, 3].map({ n -> n % 2 == 0 }.negate()) == [true, false, true]
   }
 
+  def 'once() calls the supplied closure only once'() {
+    expect:
+      (0..9).inject('', { p, q -> p += q }.once()) == '0'
+  }
+
 }

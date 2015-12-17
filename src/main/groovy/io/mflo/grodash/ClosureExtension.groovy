@@ -50,4 +50,10 @@ import groovy.transform.*
     return { Object... args -> !self(*args) }
   }
 
+  /** Creates a closure that calls the supplied closure only once. */
+  static Closure once(final Closure self) {
+    def result = null
+    return { Object... args -> result ?: (result = self(*args)) }
+  }
+
 }

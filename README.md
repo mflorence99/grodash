@@ -67,6 +67,7 @@ gradle test
 | `map` | [`_.map`](https://lodash.com/docs#map) | `[1, 2, 3].map{ it * 3 } == [3, 6, 9]` |
 | `negate` | [`_.negate`](https://lodash.com/docs#negate) | `[1, 2, 3].map({ n -> n % 2 == 0 }.negate()) == [true, false, true]` |
 | `object` | [`_.object`](https://lodash.com/docs#object) | `[['fred', 30], ['barney', 40]].object() == ['fred': 30, 'barney': 40]` |
+| `once` | [`_.once`](https://lodash.com/docs#once) | `(0..9).inject('', { p, q -> p += q }.once()) == '0'` |
 | `pluck` | [`_.pluck`](https://lodash.com/docs#pluck) | `[[a: 1], [a: 2]].pluck('a') == [1, 2]` |
 | `property`<sup>[4]</sup> |  | `[a: [b: 'c']].property('a.b') == 'c'` |
 | `pull` | [`_.pull`](https://lodash.com/docs#pull) | `[1, 2, 3, 1, 2, 3].pull(2, 3) == [1, 1]` |
