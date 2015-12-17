@@ -20,6 +20,11 @@ class MapExtensionSpec extends Specification {
       fred.contains('fred') == true
   }
 
+  def 'flattenDeep() flattens the keys of inner maps'() {
+    expect:
+      ['a': ['b': 'c']].flattenDeep() == ['a.b' : 'c']
+  }
+
   def 'includes() is a synonym for contains()'() {
     expect:
       barney.includes(36) == barney.contains(36)

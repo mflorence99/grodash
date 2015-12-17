@@ -20,28 +20,21 @@ import static io.mflo.grodash.Closures.*;
   /* make a closure for comparing list values, lodash-style */
   static Closure makeComparator = { arg ->
     Closure fn = Helpers.makeAccessor(arg)
-    return { obj, value -> fn.call(obj) <=> fn.call(value) }
+    return { obj, value -> fn(obj) <=> fn(value) }
   }
 
   /* make a closure for matching list values, lodash-style */
   static Closure makeMatcher = { args ->
-    def undefined = Math.random()
-    def matcher = { template, obj ->
-      return template.every { path, value ->
-        // NOTE: special case when value is undefined, just looking for Groovy truth
-        (value == undefined)? property(path)(obj) : (property(path)(obj) == value)
-      }
-    }
     if (args.length == 0)
       return identity
     else if ((args.length == 1) && (args[0] instanceof Closure))
       return args[0]
     else if ((args.length == 1) && (args[0] instanceof Map))
-      return matcher.curry(args[0])
+      return matches(args[0])
     else if (args.length == 1)
-      return matcher.curry([ (args[0]): undefined ])
+      return matchesProperty(args[0], true)
     else if (args.length == 2)
-      return matcher.curry([ (args[0]): args[1] ])
+      return matchesProperty(args[0], args[1])
     else throw new IllegalArgumentException("Match must be Closure, Map, property name or property name + value; found ${args}")
   }
 

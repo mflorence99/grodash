@@ -25,6 +25,19 @@ import static io.mflo.grodash.Closures.*
     self.values().contains(value)
   }
 
+  /** Creates a new map with all the keys of inner maps flattened. */
+  static Map flattenDeep(final Map self,
+                         final Map result = [:],
+                         final String key = null) {
+    self.inject(result) { obj, name, value ->
+      String k = key? "${key}.${name}" : "${name}"
+      if (value instanceof Map)
+        value.flattenDeep(obj, k)
+      else obj[k] = value
+      return obj
+    }
+  }
+
   /** includes() is a synonym for contains(). */
   static boolean includes(final Map self,
                           final Object value) {

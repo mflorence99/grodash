@@ -8,7 +8,7 @@ class ClosuresSpec extends Specification {
 
   def 'constant() creates a closure that returns a constant'() {
     expect:
-      constant(42).call() == 42
+      constant(42)() == 42
       [1, 2, 3].map(constant(5)) == [5, 5, 5]
   }
 

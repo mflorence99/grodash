@@ -15,7 +15,7 @@ import static io.mflo.grodash.Helpers.*
     boolean allTrue = true
     Closure fn = makeMatcher(args)
     for (int index = 0; index < self.size(); index++) {
-      allTrue &= !!fn.call(self[index])
+      allTrue &= !!fn(self[index])
       if (!allTrue) break;
     }
     return allTrue
@@ -27,7 +27,7 @@ import static io.mflo.grodash.Helpers.*
     boolean anyTrue = false
     Closure fn = makeMatcher(args)
     for (int index = 0; index < self.size(); index++) {
-      anyTrue |= !!fn.call(self[index])
+      anyTrue |= !!fn(self[index])
     }
     return anyTrue
   }
@@ -106,7 +106,7 @@ import static io.mflo.grodash.Helpers.*
                              final Object... args) {
     Closure fn = makeMatcher(args)
     List result = self.collect()
-    while (fn.call(result[result.size() - 1]))
+    while (fn(result[result.size() - 1]))
       result.removeAt(result.size() - 1)
     return result
   }
@@ -116,7 +116,7 @@ import static io.mflo.grodash.Helpers.*
                         final Object... args) {
     Closure fn = makeMatcher(args)
     List result = self.collect()
-    while (fn.call(result[0]))
+    while (fn(result[0]))
       result.removeAt(0)
     return result
   }
@@ -147,7 +147,7 @@ import static io.mflo.grodash.Helpers.*
                        final Object... args) {
     Closure fn = makeMatcher(args)
     int index = 0
-    for (; (index < self.size()) && !fn.call(self[index]); index++) { }
+    for (; (index < self.size()) && !fn(self[index]); index++) { }
     return (index < self.size())? index : -1
   }
 
@@ -156,7 +156,7 @@ import static io.mflo.grodash.Helpers.*
                            final Object... args) {
     Closure fn = makeMatcher(args)
     int index = self.size() - 1
-    for (; (index >= 0) && !fn.call(self[index]); index--) { }
+    for (; (index >= 0) && !fn(self[index]); index--) { }
     return index
   }
 
@@ -269,7 +269,7 @@ import static io.mflo.grodash.Helpers.*
                              final Object... args) {
     Closure fn = makeMatcher(args)
     for (int index = 0; index < self.size(); ) {
-      if (fn.call(self[index]))
+      if (fn(self[index]))
         self.removeAt(index)
       else index++
     }
@@ -310,11 +310,11 @@ import static io.mflo.grodash.Helpers.*
                              final Object arg = null) {
     Closure fn = makeComparator(arg)
     int index = Collections.binarySearch(self, value, fn)
-    // NOTE: if value not found, Java says return is (-(insertion point) - 1)
+    // NOTE: if value not found Java says return is (-(insertion point) - 1)
     if (index < 0)
       return (index + 1) * -1
     else {
-      while ((++index < self.size()) && (fn.call(self[index], value) == 0)) { }
+      while ((++index < self.size()) && (fn(self[index], value) == 0)) { }
       return index
     }
   }
@@ -324,7 +324,7 @@ import static io.mflo.grodash.Helpers.*
                              final Object... args) {
     Closure fn = makeMatcher(args)
     List result = []
-    for (int index = self.size() - 1; (index >= 0) && fn.call(self[index]); index--)
+    for (int index = self.size() - 1; (index >= 0) && fn(self[index]); index--)
       result << self[index]
     return result.reverse()
   }
@@ -334,7 +334,7 @@ import static io.mflo.grodash.Helpers.*
                         final Object... args) {
     Closure fn = makeMatcher(args)
     List result = []
-    for (int index = 0; (index < self.size()) && fn.call(self[index]); index++)
+    for (int index = 0; (index < self.size()) && fn(self[index]); index++)
       result << self[index]
     return result
   }
