@@ -70,7 +70,7 @@ gradle test
 | `object` | [`_.object`](https://lodash.com/docs#object) | `[['fred', 30], ['barney', 40]].object() == ['fred': 30, 'barney': 40]` |
 | `once` | [`_.once`](https://lodash.com/docs#once) | `(0..9).inject('', { p, q -> p += q }.once()) == '0'` |
 | `pluck` | [`_.pluck`](https://lodash.com/docs#pluck) | `[[a: 1], [a: 2]].pluck('a') == [1, 2]` |
-| `property`<sup>[4]</sup> |  | `[a: [b: 'c']].property('a.b') == 'c'` |
+| `property` | [`_.property`](https://lodash.com/docs#property)  | `property('a.b')([a: [b: 'c']]) == 'c'` |
 | `pull` | [`_.pull`](https://lodash.com/docs#pull) | `[1, 2, 3, 1, 2, 3].pull(2, 3) == [1, 1]` |
 | `pullAt` | [`_.pullAt`](https://lodash.com/docs#pullAt) | `[5, 10, 15, 20].pullAt(1, 3) == [5, 15]` |
 | `removeElements`<sup>[5]</sup> | [`_.remove`](https://lodash.com/docs#remove) | `[1, 2, 3, 4].removeElements{ it % 2 } == [1, 3]` |

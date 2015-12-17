@@ -14,7 +14,7 @@ import static io.mflo.grodash.Closures.*;
       return identity
     else if (arg instanceof Closure)
       return arg
-    else return { path, obj -> obj.property(path) }.curry(arg)
+    else return { path, obj -> property(path)(obj) }.curry(arg)
   }
 
   /* make a closure for comparing list values, lodash-style */
@@ -29,7 +29,7 @@ import static io.mflo.grodash.Closures.*;
     def matcher = { template, obj ->
       return template.every { path, value ->
         // NOTE: special case when value is undefined, just looking for Groovy truth
-        (value == undefined)? obj.property(path) : (obj.property(path) == value)
+        (value == undefined)? property(path)(obj) : (property(path)(obj) == value)
       }
     }
     if (args.length == 0)

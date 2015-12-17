@@ -12,4 +12,13 @@ import groovy.transform.*
   /* Returns the first argument passed to it. */
   static def identity = { Object... args -> args? args[0] : null }
 
+  /** Creates a closure that returns the property value at a path on a given object. */
+  static Closure property(final String path) {
+    def properties = path.split(/\./)
+    return { obj ->
+      properties.every { obj = obj[it] }
+      return obj
+    }
+  }
+
 }

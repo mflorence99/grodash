@@ -32,10 +32,4 @@ class MapExtensionSpec extends Specification {
       [1: 1, 2: 2, 3: 3, 4: 4].intersection( [1: 1.0, 2: 2, 5: 5] ) == [1: 1, 2: 2]
   }
 
-  def 'property() gets a named property value by its path'() {
-    expect:
-      [a: [b: 'c']].property('a.b') == 'c'
-      barney.property('spouse.name') == 'betty'
-  }
-
 }

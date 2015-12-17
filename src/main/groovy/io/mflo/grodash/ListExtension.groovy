@@ -2,6 +2,7 @@ package io.mflo.grodash
 
 import groovy.transform.*
 
+import static io.mflo.grodash.Closures.*
 import static io.mflo.grodash.Helpers.*
 
 /** Lodash methods applied to Groovy Lists */
@@ -226,7 +227,7 @@ import static io.mflo.grodash.Helpers.*
   static List pluck(final List self,
                     final def path) {
     self.inject([]) { result, obj ->
-      def value = obj.property(path)
+      def value = property(path)(obj)
       if (value)
         result << value
       return result

@@ -19,4 +19,9 @@ class ClosuresSpec extends Specification {
       identity([x: 'y']) == [x: 'y']
   }
 
+  def 'property() creates a closure that returns a value at a path'() {
+    expect:
+      property('a.b')([a: [b: 'c']]) == 'c'
+  }
+
 }
