@@ -24,4 +24,9 @@ class ClosuresSpec extends Specification {
       property('a.b')([a: [b: 'c']]) == 'c'
   }
 
+  def 'propertyOf() creates a closure that returns a value at a path'() {
+    expect:
+      propertyOf([a: [b: 'c']])('a.b') == 'c'
+  }
+
 }

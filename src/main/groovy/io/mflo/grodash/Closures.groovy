@@ -21,4 +21,13 @@ import groovy.transform.*
     }
   }
 
+  /** Creates a closure that returns the property value at a path on a given object. */
+  static Closure propertyOf(final def arg) {
+    def obj = arg
+    return { path ->
+      path.split(/\./).every { obj = obj[it] }
+      return obj
+    }
+  }
+
 }

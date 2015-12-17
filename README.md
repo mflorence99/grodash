@@ -71,6 +71,7 @@ gradle test
 | `once` | [`_.once`](https://lodash.com/docs#once) | `(0..9).inject('', { p, q -> p += q }.once()) == '0'` |
 | `pluck` | [`_.pluck`](https://lodash.com/docs#pluck) | `[[a: 1], [a: 2]].pluck('a') == [1, 2]` |
 | `property` | [`_.property`](https://lodash.com/docs#property)  | `property('a.b')([a: [b: 'c']]) == 'c'` |
+| `propertyOf` | [`_.propertyOf`](https://lodash.com/docs#propertyOf)  | `propertyOf([a: [b: 'c']])('a.b') == 'c'` |
 | `pull` | [`_.pull`](https://lodash.com/docs#pull) | `[1, 2, 3, 1, 2, 3].pull(2, 3) == [1, 1]` |
 | `pullAt` | [`_.pullAt`](https://lodash.com/docs#pullAt) | `[5, 10, 15, 20].pullAt(1, 3) == [5, 15]` |
 | `removeElements`<sup>[5]</sup> | [`_.remove`](https://lodash.com/docs#remove) | `[1, 2, 3, 4].removeElements{ it % 2 } == [1, 3]` |
@@ -101,8 +102,6 @@ gradle test
 > <sup>[2]</sup> Semantics and syntax expanded to match lodash
 >
 > <sup>[3]</sup> Only 'deep' semantics implemented
->
-> <sup>[4]</sup> New in this Groovy library
 >
 > <sup>[5]</sup> Renamed from lodash because of collision with existing Groovy method
 >
