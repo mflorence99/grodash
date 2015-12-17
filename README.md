@@ -41,6 +41,7 @@ gradle test
 | `chunk` | [`_.chunk`](https://lodash.com/docs#chunk) | `[1, 2, 3].chunk(2) == [[1, 2], [3]]` |
 | [`collect`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#collect%28groovy.lang.Closure%29)<sup>[1,2]</sup> | [`_.collect`](https://lodash.com/docs#collect) | `[1, 2, 3].collect{ it * 3 } == [3, 6, 9]` |
 | `compact` | [`_.compact`](https://lodash.com/docs#compact) | `[0, 1, false, 2, '', 3].compact() == [1, 2, 3]` |
+| `constant` | [`_.constant`](https://lodash.com/docs#constant) | `[1, 2, 3].map(constant(5)) == [5, 5, 5]` |
 | [`contains`](http://docs.oracle.com/javase/8/docs/api/java/util/Collection.html#contains-java.lang.Object-)<sup>[1,2]</sup> | [`_.contains`](https://lodash.com/docs#contains) | `[1, 2, 3].contains(1) == true` |
 | [`countBy`](http://docs.groovy-lang.org/latest/html/groovy-jdk/java/util/List.html#countBy%28groovy.lang.Closure%29)<sup>[1,6]</sup> | [`_.countBy`](https://lodash.com/docs#countBy) | `[4.3, 6.1, 6.4].countBy { Math.floor(it) as String } == ['4.0': 1, '6.0': 2]` |
 | `defer` | [`_.defer`](https://lodash.com/docs#defer) | `({ println it }).defer('Hello, World!') // prints Hello, World asynchronously` |

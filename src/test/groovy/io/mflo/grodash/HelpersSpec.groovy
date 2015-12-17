@@ -6,12 +6,6 @@ import static io.mflo.grodash.Helpers.*;
 
 class HelpersSpec extends Specification {
 
-  def 'identity() returns whatever was passed to it'() {
-    expect:
-      identity(42) == 42
-      identity([x: 'y']) == [x: 'y']
-  }
-
   def 'makeAccessor() accesses items in a list, lodash-style'() {
     expect:
       makeAccessor(null).call(42) == 42

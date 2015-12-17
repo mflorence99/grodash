@@ -2,17 +2,16 @@ package io.mflo.grodash
 
 import groovy.transform.*
 
-/** Lodash methods applied to Groovy Lists */
+import static io.mflo.grodash.Closures.*;
+
+/** Helper closures */
 
 @CompileDynamic class Helpers {
-
-  /* useful identity closure */
-  static Closure identity = { it }
 
   /* make a closure for accessing list values, lodash-style */
   static Closure makeAccessor = { arg ->
     if (arg == null)
-      return Helpers.identity
+      return identity
     else if (arg instanceof Closure)
       return arg
     else return { path, obj -> obj.property(path) }.curry(arg)
@@ -34,7 +33,7 @@ import groovy.transform.*
       }
     }
     if (args.length == 0)
-      return Helpers.identity
+      return identity
     else if ((args.length == 1) && (args[0] instanceof Closure))
       return args[0]
     else if ((args.length == 1) && (args[0] instanceof Map))
@@ -48,7 +47,7 @@ import groovy.transform.*
 
   /* make a closure for zipping and unzipping, lodash-style */
   static Closure makeZipper = { tuples, args ->
-    Closure zipper = Helpers.identity
+    Closure zipper = identity
     args.each { arg ->
       if (arg instanceof Closure)
         zipper = (Closure)arg
