@@ -66,6 +66,7 @@ gradle test
 | `lastIndexOf` | [`_.lastIndexOf`](https://lodash.com/docs#lastIndexOf) | `[1, 2, 1, 2].lastIndexOf(3) == 1` |
 | `object` | [`_.object`](https://lodash.com/docs#object) | `[['fred', 30], ['barney', 40]].object() == [ 'fred': 30, 'barney': 40 ]` |
 | `map` | [`_.map`](https://lodash.com/docs#map) | `[1, 2, 3].map{ it * 3 } == [3, 6, 9]` |
+| `memoize` | [`_.memoize`](https://lodash.com/docs#memoize) | `def fn = identity.memoize(constant('a')); fn(42) == fn(21)` |
 | `negate` | [`_.negate`](https://lodash.com/docs#negate) | `[1, 2, 3].map({ n -> n % 2 == 0 }.negate()) == [true, false, true]` |
 | `object` | [`_.object`](https://lodash.com/docs#object) | `[['fred', 30], ['barney', 40]].object() == ['fred': 30, 'barney': 40]` |
 | `once` | [`_.once`](https://lodash.com/docs#once) | `(0..9).inject('', { p, q -> p += q }.once()) == '0'` |

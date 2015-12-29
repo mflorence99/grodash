@@ -28,20 +28,35 @@ import groovy.transform.*
   }
 
   /** Calls the suppled closure asynchronously. */
-  static def defer(final Closure self,
-                   final Object... args) {
-    Thread.startDaemon {
+  static void defer(final Closure self,
+                    final Object... args) {
+    new Timer().schedule({
       self(*args)
-    }
+    } as TimerTask, 1)
   }
 
   /** Calls the supplied closure after N milliseconds. */
-  static def delay(final Closure self,
-                   final long wait,
-                   final Object... args) {
-    Thread.startDaemon {
-      Thread.sleep(wait)
+  static void delay(final Closure self,
+                    final long wait,
+                    final Object... args) {
+    new Timer().schedule({
       self(*args)
+    } as TimerTask, wait)
+  }
+
+  /** Creates a closure that memoizes the result of calling the given closure. If resolver is provided it determines the cache key for storing the result based on the arguments provided to the memoized function. By default, the stringified args is used. */
+  static Closure memoize(final Closure self,
+                         final Closure arg = null) {
+    Closure resolver = arg ?: { Object... args -> args as String }
+    Map cache = new WeakHashMap()
+    return { Object... args ->
+      def key = resolver(args)
+      def result = cache.get(key)
+      if (result == null) {
+        result = self(*args)
+        cache.put(key, result)
+      }
+      return result
     }
   }
 

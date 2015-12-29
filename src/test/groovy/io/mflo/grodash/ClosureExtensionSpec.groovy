@@ -6,6 +6,11 @@ import static io.mflo.grodash.Closures.*
 
 class ClosureExtensionSpec extends Specification {
 
+  def setupSpec() {
+    ({ println it }).defer('Goodbye, cruel world!')
+    ({ println it }).delay(1, 'Hello, world!')
+  }
+
   def 'after() calls the supplied closure after it has been invoked N times (README test)'() {
     expect:
       (0..9).inject('', { p, q -> p += q }.after(6)) == '56789'
@@ -48,14 +53,11 @@ class ClosureExtensionSpec extends Specification {
       flintstones[3].index == null
   }
 
-  def 'defer() calls the supplied closure asynchronously'() {
-    expect:
-      ({ println it }).defer('Goodbye, cruel world!')
-  }
-
-  def 'delay() calls the supplied closure after N ms'() {
-    expect:
-      ({ println it }).delay(1, 'Hello, World!')
+  def 'memoize() caches the result of a closure'() {
+    when:
+      def fn = identity.memoize(constant('a'))
+    then:
+      fn(42) == fn(21)
   }
 
   def 'negate() negates the return of the supplied closure'() {
