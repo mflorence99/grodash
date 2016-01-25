@@ -71,6 +71,21 @@ import groovy.transform.*
     return { Object... args -> result ?: (result = self(*args)) }
   }
 
+  /** Creates a closure that taps into the return of the supplied closure. */
+  static def tap(final Closure self,
+                 final Closure interceptor) {
+    return { Object... args ->
+      interceptor(*args);
+      return self(*args)
+    }
+  }
+
+  /** Creates a closure that taps into the return of the supplied closure. */
+  static def thru(final Closure self,
+                  final Closure interceptor) {
+    return { Object... args -> interceptor(*args) }
+  }
+
   /** Calls the supplied closure N times. */
   static def times(final Closure self,
                    final long times,

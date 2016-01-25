@@ -70,6 +70,16 @@ class ClosureExtensionSpec extends Specification {
       (0..9).inject('', { p, q -> p += q }.once()) == '0'
   }
 
+  def 'tap() is a K-combinator'() {
+    expect:
+      [1, 2, 3].map({ n -> n % 2 == 0 }.tap(identity)) == [false, true, false]
+  }
+
+  def 'thru() is like tap, except it returns the return of the interceptor'() {
+    expect:
+      [1, 2, 3].map({ n -> n % 2 == 0 }.thru(constant(42))) == [42, 42, 42]    
+  }
+
   def 'times() calls the supplied closure N times'() {
     expect:
       constant(42).times(5) == [42, 42, 42, 42, 42]
