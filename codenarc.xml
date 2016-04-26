@@ -5,6 +5,7 @@
   <ruleset-ref path='rulesets/basic.xml'>
     <exclude name='ConstantIfExpression'/>
     <exclude name='DoubleNegative'/>
+    <exclude name='EmptyClass'/>
     <exclude name='EmptyIfStatement'/>
     <exclude name='EmptyForStatement'/>
     <exclude name='EmptyWhileStatement'/>
